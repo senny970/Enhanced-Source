@@ -194,6 +194,7 @@ BEGIN_DATADESC( CBaseAnimating )
 	DEFINE_FIELD( m_nNewSequenceParity, FIELD_INTEGER ),
 	DEFINE_FIELD( m_nResetEventsParity, FIELD_INTEGER ),
 	DEFINE_FIELD( m_nMuzzleFlashParity, FIELD_CHARACTER ),
+	DEFINE_FIELD( m_bSuppressAnimSounds, FIELD_BOOLEAN ),
 
 	DEFINE_KEYFIELD( m_iszLightingOriginRelative, FIELD_STRING, "LightingOriginHack" ),
 	DEFINE_KEYFIELD( m_iszLightingOrigin, FIELD_STRING, "LightingOrigin" ),
@@ -219,6 +220,8 @@ BEGIN_DATADESC( CBaseAnimating )
 
 	DEFINE_INPUTFUNC( FIELD_VOID, "EnableDraw", InputEnableDrawing ),
 	DEFINE_INPUTFUNC( FIELD_VOID, "DisableDraw", InputDisableDrawing ),
+
+	DEFINE_INPUTFUNC( FIELD_VECTOR, "SetModelScale", InputSetModelScale ),
 
 	DEFINE_FIELD( m_flFrozen, FIELD_FLOAT ),
 	DEFINE_FIELD( m_flFrozenThawRate, FIELD_FLOAT ),
@@ -269,6 +272,8 @@ IMPLEMENT_SERVERCLASS_ST(CBaseAnimating, DT_BaseAnimating)
 	SendPropDataTable( "serveranimdata", 0, &REFERENCE_SEND_TABLE( DT_ServerAnimationData ), SendProxy_ClientSideAnimation ),
 
 	SendPropFloat( SENDINFO( m_flFrozen ) ),
+
+	SendPropBool( SENDINFO(m_bSuppressAnimSounds) ),
 
 END_SEND_TABLE()
 
@@ -653,6 +658,18 @@ void CBaseAnimating::InputEnableDrawing( inputdata_t& inputdata )
 void CBaseAnimating::InputDisableDrawing( inputdata_t& inputdata )
 { 
 	RemoveFlag(EF_NODRAW);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+// Input  : &inputdata - 
+//-----------------------------------------------------------------------------
+void CBaseAnimating::InputSetModelScale(inputdata_t &inputdata)
+{
+	Vector vecScale;
+	inputdata.value.Vector3D(vecScale);
+
+	SetModelScale(vecScale.x, vecScale.y);
 }
 
 //=========================================================

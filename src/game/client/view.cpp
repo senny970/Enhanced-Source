@@ -46,7 +46,9 @@
 #endif
 #ifdef GAMEUI_EMBEDDED
 
-#if defined( SWARM_DLL )
+#if defined( TEMPLATE_DLL )
+#include "template/gameui/basemodpanel.h"
+#elif defined ( SWARM_DLL )
 #include "swarm/gameui/swarm/basemodpanel.h"
 #else
 #error "GAMEUI_EMBEDDED"

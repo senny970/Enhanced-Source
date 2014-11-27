@@ -44,6 +44,7 @@
 #include "voice_status.h"
 #include "fx.h"
 #include "cellcoord.h"
+#include "cam_thirdperson.h"
 
 #include "debugoverlay_shared.h"
 
@@ -412,6 +413,9 @@ C_BasePlayer::C_BasePlayer() : m_iv_vecViewOffset( "C_BasePlayer::m_iv_vecViewOf
 	m_nSplitScreenSlot = -1;
 	m_bIsLocalPlayer = false;
 	m_afButtonForced = 0;
+
+	ConVarRef scissor("r_flashlightscissor");
+	scissor.SetValue("0");
 
 }
 
@@ -2003,8 +2007,7 @@ void C_BasePlayer::GetToolRecordingState( KeyValues *msg )
 	// then this code can (should!) be removed
 	if ( state.m_bThirdPerson )
 	{
-		Vector cam_ofs;
-		::input->CAM_GetCameraOffset( cam_ofs );
+		Vector cam_ofs = g_ThirdPersonManager.GetCameraOffsetAngles();
 
 		QAngle camAngles;
 		camAngles[ PITCH ] = cam_ofs[ PITCH ];

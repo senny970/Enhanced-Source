@@ -832,6 +832,21 @@ enum
 #define COMMENTARY_BUTTONS		(IN_USE)
 #endif
 
+#define TEAM_TRAIN_MAX_TEAMS			4
+#define TEAM_TRAIN_MAX_HILLS			5
+#define TEAM_TRAIN_FLOATS_PER_HILL		2
+#define TEAM_TRAIN_HILLS_ARRAY_SIZE		TEAM_TRAIN_MAX_TEAMS * TEAM_TRAIN_MAX_HILLS * TEAM_TRAIN_FLOATS_PER_HILL
+
+enum
+{
+	HILL_TYPE_NONE = 0,
+	HILL_TYPE_UPHILL,
+	HILL_TYPE_DOWNHILL,
+};
+
+#define NOINTERP_PARITY_MAX			4
+#define NOINTERP_PARITY_MAX_BITS	2
+
 bool IsHeadTrackingEnabled();
 
 // If this is defined, all of the scopeguard objects are NULL'd out to reduce overhead

@@ -368,6 +368,8 @@ private:
 	void InputSetLightingOriginRelative( inputdata_t &inputdata );
 	void InputSetLightingOrigin( inputdata_t &inputdata );
 
+	void InputSetModelScale(inputdata_t &inputdata);
+
 public:
 	bool CanSkipAnimation( void );
 
@@ -387,6 +389,8 @@ public:
 
 	// was pev->framerate
 	CNetworkVar( float, m_flPlaybackRate );
+
+	CNetworkVar( bool, m_bSuppressAnimSounds );
 
 public:
 	void InitStepHeightAdjust( void );
