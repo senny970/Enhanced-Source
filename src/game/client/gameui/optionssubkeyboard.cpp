@@ -44,7 +44,8 @@ using namespace vgui;
 //-----------------------------------------------------------------------------
 COptionsSubKeyboard::COptionsSubKeyboard(vgui::Panel *parent) : EditablePanel(parent, "OptionsSubKeyboard" )
 {
-	vgui::HScheme scheme = vgui::scheme()->LoadSchemeFromFile("resource/SwarmFrameScheme.res", "SwarmFrameScheme");
+	//vgui::HScheme scheme = vgui::scheme()->LoadSchemeFromFile("resource/SwarmFrameScheme.res", "SwarmFrameScheme");
+	vgui::HScheme scheme = vgui::scheme()->LoadSchemeFromFile("resource/menuscheme.res", "SwarmScheme");
 	SetScheme(scheme);
 
 	Q_memset( m_Bindings, 0, sizeof( m_Bindings ));
@@ -167,7 +168,7 @@ void COptionsSubKeyboard::OnCommand( const char *command )
 	}
 	else if ( !m_pKeyBindList->IsCapturing() && !stricmp( command, "ClearKey" ) )
 	{
-		// OnKeyCodePressed( ButtonCodeToJoystickButtonCode( KEY_DELETE, CL4DBasePanel::GetSingleton().GetLastActiveUserId() ) );
+		//OnKeyCodePressed( ButtonCodeToJoystickButtonCode( KEY_DELETE, CL4DBasePanel::GetSingleton().GetLastActiveUserId() ) );
 		OnKeyCodePressed( KEY_DELETE ); // <<< PC only code, no need for joystick management
         m_pKeyBindList->RequestFocus();
 	}
