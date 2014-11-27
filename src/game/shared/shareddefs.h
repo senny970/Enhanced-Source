@@ -915,12 +915,6 @@ enum Class_T
 #define NUM_SHARED_FACTIONS			(FACTION_NONE + 1)
 
 // Our Game-based shareddefs go here.
-#ifdef TEMPLATE_DLL
-#include "sdk_shareddefs.h"
-#endif
-
-#ifdef VECTRONIC_DLL
-#include "vectronic_shareddefs.h"
-#endif
+#include "my_shareddefs.h"
 
 #endif // SHAREDDEFS_H
