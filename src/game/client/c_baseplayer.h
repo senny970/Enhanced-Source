@@ -421,6 +421,8 @@ public:
 
 	virtual void			OnAchievementAchieved( int iAchievement ) {}
 
+	virtual bool			CanUseFirstPersonCommand(void){ return true; }
+
 protected:
 	fogparams_t				m_CurrentFog;
 	EHANDLE					m_hOldFogController;

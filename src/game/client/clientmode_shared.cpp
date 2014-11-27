@@ -39,7 +39,7 @@
 #include "xbox/xbox_console.h"
 #endif
 #include "matchmaking/imatchframework.h"
-
+#include "cam_thirdperson.h"
 
 
 // memdbgon must be the last include file in a .cpp file!!!
@@ -311,18 +311,28 @@ void ClientModeShared::OverrideView( CViewSetup *pSetup )
 
 	if( ::input->CAM_IsThirdPerson() )
 	{
-		Vector cam_ofs;
+		Vector cam_ofs = g_ThirdPersonManager.GetCameraOffsetAngles();
+		Vector cam_ofs_distance = g_ThirdPersonManager.GetFinalCameraOffset();
 
-		::input->CAM_GetCameraOffset( cam_ofs );
+		cam_ofs_distance *= g_ThirdPersonManager.GetDistanceFraction();
 
 		camAngles[ PITCH ] = cam_ofs[ PITCH ];
 		camAngles[ YAW ] = cam_ofs[ YAW ];
 		camAngles[ ROLL ] = 0;
 
 		Vector camForward, camRight, camUp;
-		AngleVectors( camAngles, &camForward, &camRight, &camUp );
 
-		VectorMA( pSetup->origin, -cam_ofs[ ROLL ], camForward, pSetup->origin );
+		if (g_ThirdPersonManager.IsOverridingThirdPerson() == false)
+		{
+			engine->GetViewAngles(camAngles);
+		}
+
+		// get the forward vector
+		AngleVectors(camAngles, &camForward, &camRight, &camUp);
+
+		VectorMA(pSetup->origin, -cam_ofs_distance[0], camForward, pSetup->origin);
+		VectorMA(pSetup->origin, cam_ofs_distance[1], camRight, pSetup->origin);
+		VectorMA(pSetup->origin, cam_ofs_distance[2], camUp, pSetup->origin);
 
 		static ConVarRef c_thirdpersonshoulder( "c_thirdpersonshoulder" );
 		if ( c_thirdpersonshoulder.GetBool() )
@@ -707,6 +717,9 @@ void ClientModeShared::LevelInit( const char *newmap )
 //-----------------------------------------------------------------------------
 void ClientModeShared::LevelShutdown( void )
 {
+	// Reset the third person camera so we don't crash
+	g_ThirdPersonManager.Init();
+
 	if ( m_pChatElement )
 	{
 	m_pChatElement->LevelShutdown();
