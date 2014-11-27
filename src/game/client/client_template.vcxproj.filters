@@ -1676,6 +1676,9 @@
     <ClCompile Include="template\hud_developer.cpp">
       <Filter>My Game\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="cam_thirdperson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievement_notification_panel.h">
@@ -3722,6 +3725,9 @@
       <Filter>Source Files\GameUI - Embedded\Base GameUI\Headers</Filter>
     </ClInclude>
     <ClInclude Include="vscript_client_nut.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cam_thirdperson.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

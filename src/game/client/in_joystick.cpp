@@ -865,7 +865,8 @@ void CInput::JoyStickThirdPersonPlatformer( CUserCmd *cmd, float &forward, float
 	engine->GetViewAngles( viewangles );
 
 	int nSlot = GET_ACTIVE_SPLITSCREEN_SLOT();
-	PerUserInput_t &user = GetPerUser( nSlot );
+	// We are not used, still keeping this here incase we need to be again ~reep
+//	PerUserInput_t &user = GetPerUser( nSlot ); 
 
 	if ( forward || side )
 	{

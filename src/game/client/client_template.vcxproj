@@ -270,6 +270,7 @@ copy "$(TargetDir)"client.dll "C:\Program Files (x86)\Steam\steamapps\common\Sou
     <ClCompile Include="..\..\common\blackbox_helper.cpp" />
     <ClCompile Include="..\..\public\bone_accessor.cpp" />
     <ClCompile Include="bone_merge_cache.cpp" />
+    <ClCompile Include="cam_thirdperson.cpp" />
     <ClCompile Include="c_ai_basehumanoid.cpp" />
     <ClCompile Include="c_ai_basenpc.cpp" />
     <ClCompile Include="c_baseanimating.cpp" />
@@ -1073,6 +1074,7 @@ copy "$(TargetDir)"client.dll "C:\Program Files (x86)\Steam\steamapps\common\Sou
     <ClInclude Include="..\shared\ai_speechconcept.h" />
     <ClInclude Include="..\shared\baseachievement.h" />
     <ClInclude Include="..\..\common\blackbox_helper.h" />
+    <ClInclude Include="cam_thirdperson.h" />
     <ClInclude Include="c_baseglowanimating.h" />
     <ClInclude Include="c_baselesson.h" />
     <ClInclude Include="c_basetoggle.h" />

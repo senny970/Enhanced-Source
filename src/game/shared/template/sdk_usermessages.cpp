@@ -50,14 +50,8 @@ void RegisterUserMessages( void )
 	usermessages->Register( "LogoTimeMsg", 4 );
 	usermessages->Register( "AchievementEvent", -1 );
 	usermessages->Register( "UpdateJalopyRadar", -1 );
-<<<<<<< HEAD
-	usermessages->Register( "CurrentTimescale", 4 );	// Send one float for the new timescale
-	usermessages->Register( "DesiredTimescale", 13 );	// Send timescale and some blending vars
-=======
 	usermessages->Register( "CurrentTimescale", 4);	// Send one float for the new timescale
 	usermessages->Register( "DesiredTimescale", 13);	// Send timescale and some blending vars
-
->>>>>>> origin/master
 
 #ifndef SWARM_DLL
 #ifndef _X360
