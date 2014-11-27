@@ -5108,44 +5108,48 @@ bool DrawingShadowDepthView( void ) //for easy externing
 //-----------------------------------------------------------------------------
 void CShadowDepthView::Draw()
 {
-	VPROF_BUDGET( "CShadowDepthView::Draw", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
+	VPROF_BUDGET("CShadowDepthView::Draw", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
 
 	// Start view
 	unsigned int visFlags;
-	m_pMainView->SetupVis( (*this), visFlags );  // @MULTICORE (toml 8/9/2006): Portal problem, not sending custom vis down
+	m_pMainView->SetupVis((*this), visFlags);  // @MULTICORE (toml 8/9/2006): Portal problem, not sending custom vis down
 
-	CMatRenderContextPtr pRenderContext( materials );
+	CMatRenderContextPtr pRenderContext(materials);
 
 	pRenderContext->ClearColor3ub(0xFF, 0xFF, 0xFF);
 
 #if defined( _X360 )
-	pRenderContext->PushVertexShaderGPRAllocation( 112 ); //almost all work is done in vertex shaders for depth rendering, max out their threads
+	pRenderContext->PushVertexShaderGPRAllocation(112); //almost all work is done in vertex shaders for depth rendering, max out their threads
 #endif
 
 	pRenderContext.SafeRelease();
 
-	if( IsPC() )
+	if (IsPC())
 	{
-		render->Push3DView( (*this), VIEW_CLEAR_DEPTH, m_pRenderTarget, GetFrustum(), m_pDepthTexture );
+		render->Push3DView((*this), VIEW_CLEAR_DEPTH, m_pRenderTarget, GetFrustum(), m_pDepthTexture);
 	}
-	else if( IsX360() )
+	else if (IsX360())
 	{
 		//for the 360, the dummy render target has a separate depth buffer which we Resolve() from afterward
-		render->Push3DView( (*this), VIEW_CLEAR_DEPTH, m_pRenderTarget, GetFrustum() );
+		render->Push3DView((*this), VIEW_CLEAR_DEPTH, m_pRenderTarget, GetFrustum());
 	}
 
-	SetupCurrentView( origin, angles, VIEW_SHADOW_DEPTH_TEXTURE );
+	pRenderContext.GetFrom(materials);
+	pRenderContext->PushRenderTargetAndViewport(m_pRenderTarget, m_pDepthTexture, 0, 0, m_pDepthTexture->GetMappingWidth(), m_pDepthTexture->GetMappingWidth());
+	pRenderContext.SafeRelease();
+
+	SetupCurrentView(origin, angles, VIEW_SHADOW_DEPTH_TEXTURE);
 
 	MDLCACHE_CRITICAL_SECTION();
 
 	{
-		VPROF_BUDGET( "BuildWorldRenderLists", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
-		BuildWorldRenderLists( true, -1, true, true ); // @MULTICORE (toml 8/9/2006): Portal problem, not sending custom vis down
+		VPROF_BUDGET("BuildWorldRenderLists", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
+		BuildWorldRenderLists(true, -1, true, true); // @MULTICORE (toml 8/9/2006): Portal problem, not sending custom vis down
 	}
 
 	{
-		VPROF_BUDGET( "BuildRenderableRenderLists", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
-		BuildRenderableRenderLists( CurrentViewID() );
+		VPROF_BUDGET("BuildRenderableRenderLists", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
+		BuildRenderableRenderLists(CurrentViewID());
 	}
 
 	engine->Sound_ExtraUpdate();	// Make sure sound doesn't stutter
@@ -5153,38 +5157,40 @@ void CShadowDepthView::Draw()
 	m_DrawFlags = m_pMainView->GetBaseDrawFlags() | DF_RENDER_UNDERWATER | DF_RENDER_ABOVEWATER | DF_SHADOW_DEPTH_MAP;	// Don't draw water surface...
 
 	{
-		VPROF_BUDGET( "DrawWorld", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
-		DrawWorld( 0.0f );
+		VPROF_BUDGET("DrawWorld", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
+		DrawWorld(0.0f);
 	}
 
 	// Draw opaque and translucent renderables with appropriate override materials
 	// OVERRIDE_DEPTH_WRITE is OK with a NULL material pointer
-	modelrender->ForcedMaterialOverride( NULL, OVERRIDE_DEPTH_WRITE );	
+	modelrender->ForcedMaterialOverride(NULL, OVERRIDE_DEPTH_WRITE);
 
 	{
-		VPROF_BUDGET( "DrawOpaqueRenderables", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
-		DrawOpaqueRenderables( true );
+		VPROF_BUDGET("DrawOpaqueRenderables", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
+		DrawOpaqueRenderables(true);
 	}
 
-	if ( m_bRenderFlashlightDepthTranslucents || r_flashlightdepth_drawtranslucents.GetBool() )
+	if (m_bRenderFlashlightDepthTranslucents || r_flashlightdepth_drawtranslucents.GetBool())
 	{
-		VPROF_BUDGET( "DrawTranslucentRenderables", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING );
-		DrawTranslucentRenderables( false, true );
+		VPROF_BUDGET("DrawTranslucentRenderables", VPROF_BUDGETGROUP_SHADOW_DEPTH_TEXTURING);
+		DrawTranslucentRenderables(false, true);
 	}
 
-	modelrender->ForcedMaterialOverride( 0 );
+	modelrender->ForcedMaterialOverride(0);
 
 	m_DrawFlags = 0;
 
-	pRenderContext.GetFrom( materials );
+	pRenderContext.GetFrom(materials);
 
-	if( IsX360() )
+	if (IsX360())
 	{
 		//Resolve() the depth texture here. Before the pop so the copy will recognize that the resolutions are the same
-		pRenderContext->CopyRenderTargetToTextureEx( m_pDepthTexture, -1, NULL, NULL );
+		pRenderContext->CopyRenderTargetToTextureEx(m_pDepthTexture, -1, NULL, NULL);
 	}
 
-	render->PopView( GetFrustum() );
+	pRenderContext->PopRenderTargetAndViewport();
+
+	render->PopView(GetFrustum());
 
 #if defined( _X360 )
 	pRenderContext->PopVertexShaderGPRAllocation();

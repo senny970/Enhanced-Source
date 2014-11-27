@@ -179,6 +179,8 @@ IMPLEMENT_CLIENTCLASS_DT(C_BaseAnimating, DT_BaseAnimating, CBaseAnimating)
 
 	RecvPropFloat( RECVINFO( m_flFrozen ) ), 
 
+	RecvPropBool( RECVINFO( m_bSuppressAnimSounds ) ),
+
 END_RECV_TABLE()
 
 BEGIN_PREDICTION_DATA( C_BaseAnimating )
@@ -4078,17 +4080,20 @@ void C_BaseAnimating::FireEvent( const Vector& origin, const QAngle& angles, int
 
 	case AE_CL_PLAYSOUND:
 		{
-			CLocalPlayerFilter filter;
+			if (!m_bSuppressAnimSounds)
+			{
+				CLocalPlayerFilter filter;
 
-			if ( m_Attachments.Count() > 0)
-			{
-				GetAttachment( 1, attachOrigin, attachAngles );
-				EmitSound( filter, GetSoundSourceIndex(), options, &attachOrigin );
+				if (m_Attachments.Count() > 0)
+				{
+					GetAttachment(1, attachOrigin, attachAngles);
+					EmitSound(filter, GetSoundSourceIndex(), options, &attachOrigin);
+				}
+				else
+				{
+					EmitSound(filter, GetSoundSourceIndex(), options, &GetAbsOrigin());
+				}
 			}
-			else
-			{
-				EmitSound( filter, GetSoundSourceIndex(), options, &GetAbsOrigin() );
-			} 
 		}
 		break;
 	case AE_CL_STOPSOUND:
@@ -4491,16 +4496,19 @@ void C_BaseAnimating::FireObsoleteEvent( const Vector& origin, const QAngle& ang
 	// Obsolete: Use the AE_CL_PLAYSOUND event instead, which doesn't rely on a magic number in the .qc
 	case CL_EVENT_SOUND:
 		{
-			CLocalPlayerFilter filter;
+			if (!m_bSuppressAnimSounds)
+			{
+				CLocalPlayerFilter filter;
 
-			if ( m_Attachments.Count() > 0)
-			{
-				GetAttachment( 1, attachOrigin, attachAngles );
-				EmitSound( filter, GetSoundSourceIndex(), options, &attachOrigin );
-			}
-			else
-			{
-				EmitSound( filter, GetSoundSourceIndex(), options );
+				if (m_Attachments.Count() > 0)
+				{
+					GetAttachment(1, attachOrigin, attachAngles);
+					EmitSound(filter, GetSoundSourceIndex(), options, &attachOrigin);
+				}
+				else
+				{
+					EmitSound(filter, GetSoundSourceIndex(), options);
+				}
 			}
 		}
 		break;

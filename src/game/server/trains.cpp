@@ -1119,10 +1119,16 @@ BEGIN_DATADESC( CFuncTrackTrain )
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedDir", InputSetSpeedDir ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedReal", InputSetSpeedReal ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedDirAccel", InputSetSpeedDirAccel ),
+	DEFINE_INPUTFUNC( FIELD_STRING, "TeleportToPathNode", InputTeleportToPathNode ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "LockOrientation", InputLockOrientation ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "UnlockOrientation", InputUnlockOrientation ),
+	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetMaxSpeed", InputSetMaxSpeed ),
 
 	// Outputs
 	DEFINE_OUTPUT( m_OnStart, "OnStart" ),
 	DEFINE_OUTPUT( m_OnNext, "OnNextPoint" ),
+	DEFINE_OUTPUT( m_OnNext, "OnNext"),
+	DEFINE_OUTPUT( m_OnArrivedAtDestinationNode, "OnArrivedAtDestinationNode" ),
 
 	// Function Pointers
 	DEFINE_FUNCTION( Next ),
@@ -2082,6 +2088,21 @@ void CFuncTrackTrain::DoUpdateOrientation( const QAngle &curAngles, const QAngle
 	SetLocalAngularVelocity( vecAngVel );
 }
 
+//-----------------------------------------------------------------------------
+// Purpose: Input handler that teleports the train to the input path node
+// Input  : path_track
+//-----------------------------------------------------------------------------
+void CFuncTrackTrain::InputTeleportToPathNode(inputdata_t &inputdata)
+{
+	const char *pszName = inputdata.value.String();
+	CPathTrack *pNode = dynamic_cast<CPathTrack*>(gEntList.FindEntityByName(NULL, pszName));
+
+	if (pNode)
+	{
+		TeleportToPathTrack(pNode);
+		m_ppath = pNode;
+	}
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -2224,6 +2245,8 @@ void CFuncTrackTrain::Next( void )
 		
 		// Move to the dead end
 		
+		m_OnArrivedAtDestinationNode.FireOutput( this, this );
+
 		// Are we there yet?
 		if ( distance > 0 )
 		{
@@ -2589,7 +2612,30 @@ void CFuncTrackTrain::MoveDone()
 	BaseClass::MoveDone();
 }
 
+//-----------------------------------------------------------------------------
+// Purpose: Lock the current orientation of the train.
+//-----------------------------------------------------------------------------
+void CFuncTrackTrain::InputLockOrientation(inputdata_t &inputdata)
+{
+	m_eOrientationType = TrainOrientation_Fixed;
+}
 
+//-----------------------------------------------------------------------------
+// Purpose: Unlock the current orientation of the train.
+//-----------------------------------------------------------------------------
+void CFuncTrackTrain::InputUnlockOrientation(inputdata_t &inputdata)
+{
+	m_eOrientationType = TrainOrientation_AtPathTracks;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Set a new max speed for the train.
+//-----------------------------------------------------------------------------
+void CFuncTrackTrain::InputSetMaxSpeed(inputdata_t &inputdata)
+{
+	float m_maxSpeed = inputdata.value.Float();
+	SetSpeed(m_maxSpeed);
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: Defines the volume of space that the player must stand in to
