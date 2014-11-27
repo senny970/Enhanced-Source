@@ -49,6 +49,13 @@ public:
 
 	virtual bool	WeaponShouldBeLowered( void );
 
+#if defined( CLIENT_DLL )
+	// Should this object receive shadows?
+	virtual bool ShouldReceiveProjectedTextures( int flags )
+	{
+		return false;
+	}
+#endif
 			bool	CanLower();
 	virtual bool	Ready( void );
 	virtual bool	Lower( void );

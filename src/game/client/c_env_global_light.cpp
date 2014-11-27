@@ -15,9 +15,15 @@
 extern ConVar cl_sunlight_ortho_size;
 extern ConVar cl_sunlight_depthbias;
 
-ConVar cl_globallight_freeze( "cl_globallight_freeze", "0" );
-ConVar cl_globallight_xoffset( "cl_globallight_xoffset", "-800" );
-ConVar cl_globallight_yoffset( "cl_globallight_yoffset", "1600" );
+ConVar cl_globallight_freeze( "cl_globallight_freeze", "0" );   // Don't follow the player, have this set to a fix point.
+ConVar cl_globallight_xoffset( "cl_globallight_xoffset", "0" ); // Set me to 0 so it's on the player.
+ConVar cl_globallight_yoffset( "cl_globallight_yoffset", "0" ); // Set me to 0 so it's on the player.
+
+// Draw where we are projecting the light.
+ConVar cl_globallight_debug( "cl_globallight_debug", "0" );
+
+// We still rely on r_flashlightbrightness, but here we can adjust the multiplier of the global light.
+ConVar cl_globallight_brightness( "cl_globallight_brightness_multiplier", "1.0" );  
 
 //------------------------------------------------------------------------------
 // Purpose : Sunlights shadow control entity
@@ -116,6 +122,8 @@ void C_GlobalLight::ClientThink()
 
 	bool bSupressWorldLights = false;
 
+	// We need to fix this someday. If the entity starts frozen, the light does not cast.
+	// A way to overcome this is to toggle this bool with a logic_auto with a delay.
 	if ( cl_globallight_freeze.GetBool() == true )
 	{
 		return;
@@ -183,7 +191,7 @@ void C_GlobalLight::ClientThink()
 		state.m_Color[3] = 0.0f; // fixme: need to make ambient work m_flAmbient;
 		state.m_NearZ = 4.0f;
 		state.m_FarZ = m_flSunDistance * 2.0f;
-		state.m_fBrightnessScale = 2.0f;
+		state.m_fBrightnessScale = cl_globallight_brightness.GetFloat();
 		state.m_bGlobalLight = true;
 
 		float flOrthoSize = 1000.0f;
@@ -201,7 +209,12 @@ void C_GlobalLight::ClientThink()
 			state.m_bOrtho = false;
 		}
 
-		state.m_bDrawShadowFrustum = true;
+		if (cl_globallight_debug.GetBool())
+		{
+			// Draw where we are projecting.
+			state.m_bDrawShadowFrustum = true;
+		}
+
 		state.m_flShadowSlopeScaleDepthBias = g_pMaterialSystemHardwareConfig->GetShadowSlopeScaleDepthBias();;
 		state.m_flShadowDepthBias = g_pMaterialSystemHardwareConfig->GetShadowDepthBias();
 		state.m_bEnableShadows = m_bEnableShadows;

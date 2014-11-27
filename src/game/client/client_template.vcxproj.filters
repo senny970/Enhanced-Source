@@ -1679,6 +1679,12 @@
     <ClCompile Include="cam_thirdperson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="template\c_basesdkcombatweapon.cpp">
+      <Filter>My Game\Weapons\Bases</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\template\basesdkcombatweapon_shared.cpp">
+      <Filter>My Game\Weapons\Bases</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievement_notification_panel.h">
@@ -3729,6 +3735,12 @@
     </ClInclude>
     <ClInclude Include="cam_thirdperson.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="template\c_basesdkcombatweapon.h">
+      <Filter>My Game\Weapons\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\template\basesdkcombatweapon_shared.h">
+      <Filter>My Game\Weapons\Bases</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

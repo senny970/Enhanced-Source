@@ -410,7 +410,7 @@ void CBaseSDKCombatWeapon::FireBullets( const FireBulletsInfo_t &info )
 {
 	FireBulletsInfo_t modinfo = info;
 
-	modinfo.m_iPlayerDamage = GetSDKWpnData().m_iPlayerDamage;
+	modinfo.m_flPlayerDamage = GetSDKWpnData().m_flPlayerDamage;
 
 	BaseClass::FireBullets( modinfo );
 }

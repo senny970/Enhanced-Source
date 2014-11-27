@@ -7,7 +7,7 @@
 #include "cbase.h"
 #include "basesdkcombatweapon.h"
 #include "soundent.h"
-#include "sdk_player_sp.h"
+#include "sdk_player.h"
 #include "ai_basenpc.h"
 #include "game.h"
 #include "in_buttons.h"
