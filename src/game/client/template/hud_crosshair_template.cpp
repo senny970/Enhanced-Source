@@ -1,99 +1,102 @@
-//========= Copyright 1996-2005, Valve Corporation, All rights reserved. ============//
+//=========== Copyright © 2014, rHetorical, All rights reserved. =============
 //
-// Purpose: 
+// Purpose: The basic crosshair refuses to draw, so here is a crosshair to replace it.
 //
-// $NoKeywords: $
 //=============================================================================//
 
 #include "cbase.h"
 #include "hud.h"
-#include "hud_crosshair.h"
+#include "hudelement.h"
 #include "iclientmode.h"
-#include "view.h"
-#include "vgui_controls/controls.h"
-#include "vgui/ISurface.h"
-#include "IVRenderView.h"
+#include "engine/IEngineSound.h"
+#include "vgui_controls/AnimationController.h"
+#include "vgui_controls/Controls.h"
+#include <vgui_controls/Panel.h>
+#include <vgui/isurface.h>
+#include "clientmode.h"
+#include "c_baseplayer.h"
+#include "materialsystem/IMaterial.h"
+#include "materialsystem/IMesh.h"
+#include "materialsystem/imaterialvar.h"
+#include "mathlib/mathlib.h"
+#include "../hud_crosshair.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-extern ConVar crosshair;
-extern ConVar cl_observercrosshair;
-
-using namespace vgui;
-
+namespace vgui
+{
+	class IScheme;
+};
 
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-class CHudCrosshairTemplate : public CHudElement, public vgui::Panel
+class CHudTemplateCrosshair : public CHudElement, public vgui::Panel
 {
 public:
-	DECLARE_CLASS_SIMPLE( CHudCrosshairTemplate, vgui::Panel );
+	DECLARE_CLASS_SIMPLE( CHudTemplateCrosshair, vgui::Panel );
 
-	CHudCrosshairTemplate( const char *name );
+	CHudTemplateCrosshair( const char *name );
 
 	//virtual void OnThink();
 	virtual void Paint();
 	virtual void Init();
-	void VidInit( void );
 	virtual bool ShouldDraw();
 	virtual void ApplySchemeSettings( vgui::IScheme *scheme );
 
-	//virtual void LevelShutdown( void );
+	virtual void LevelShutdown( void );
+
+	//stub
+	void SetCrosshair( CHudTexture *texture, Color& clr ) {}
+	void ResetCrosshair() {}
 
 private:
 
-	CHudTexture		*m_pDefaultCrosshair;
+	void	UpdateEventTime( void );
+	//bool	m_bDraw;
+	int					m_iCrosshairTextureID;
+	IVguiMatInfo		*m_pCrosshair;	
 
-	Color			m_clrCrosshair;
-	QAngle			m_vecCrossHairOffsetAngle;
-
-	QAngle			m_curViewAngles;
-	Vector			m_curViewOrigin;
+	CHudTexture		*m_icon01;
 };
 
-DECLARE_HUDELEMENT( CHudCrosshairTemplate );
+using namespace vgui;
 
-CHudCrosshairTemplate::CHudCrosshairTemplate( const char *pName ) :
-	vgui::Panel( NULL, "HudCrosshair2" ), CHudElement( pName )
+DECLARE_HUDELEMENT( CHudTemplateCrosshair );
+
+CHudTemplateCrosshair::CHudTemplateCrosshair( const char *pName ) :
+	vgui::Panel( NULL, "HudCrosshair" ), CHudElement( pName )
 {
 	vgui::Panel *pParent = GetClientMode()->GetViewport();
 	SetParent( pParent );
 
-	SetHiddenBits( HIDEHUD_CROSSHAIR );
+	SetHiddenBits( HIDEHUD_PLAYERDEAD );
 }
 
-void CHudCrosshairTemplate::ApplySchemeSettings( IScheme *scheme )
+void CHudTemplateCrosshair::ApplySchemeSettings( IScheme *scheme )
 {
 	BaseClass::ApplySchemeSettings( scheme );
 
+	m_icon01 = HudIcons().GetIcon( "crosshair_default" );
+
 	SetPaintBackgroundEnabled( false );
+
+	SetSize( ScreenWidth(), ScreenHeight() );
 }
 
-void CHudCrosshairTemplate::Init()
+void CHudTemplateCrosshair::LevelShutdown( void )
 {
 }
 
-void CHudCrosshairTemplate::VidInit()
+void CHudTemplateCrosshair::Init()
 {
-	Init();
-
-	m_pDefaultCrosshair = HudIcons().GetIcon("crosshair_default");
 }
 
-
-bool CHudCrosshairTemplate::ShouldDraw()
+bool CHudTemplateCrosshair::ShouldDraw()
 {
-	if ( !m_pDefaultCrosshair )
-		return false;
-
 	C_BasePlayer *pPlayer = C_BasePlayer::GetLocalPlayer();
 	if ( !pPlayer )
-		return false;
-
-	C_BaseCombatWeapon *pWeapon = pPlayer->GetActiveWeapon();
-	if ( pWeapon && !pWeapon->ShouldDrawCrosshair() )
 		return false;
 
 	if ( !crosshair.GetBool() && !IsX360() )
@@ -102,19 +105,12 @@ bool CHudCrosshairTemplate::ShouldDraw()
 	return true;
 }
 
-void CHudCrosshairTemplate::Paint()
+void CHudTemplateCrosshair::Paint()
 {
-	if ( !m_pDefaultCrosshair )
-		return;
+	int		xCenter	= ( ScreenWidth() - m_icon01->Width() ) / 2;
+	int		yCenter = ( ScreenHeight() - m_icon01->Height() ) / 2;
 
-	if ( !IsCurrentViewAccessAllowed() )
-		return;
+	Color clr(255,255,255,255);
 
-	int		xCenter	= ( ScreenWidth() - m_pDefaultCrosshair->Width() ) / 2;
-	int		yCenter = ( ScreenHeight() - m_pDefaultCrosshair->Height() ) / 2;
-
-	m_clrCrosshair = Color( 255, 255, 255, 255 );
-
-	m_pDefaultCrosshair->DrawSelf( xCenter, yCenter, m_clrCrosshair );
-
+	m_icon01->DrawSelf( xCenter, yCenter, clr );
 }

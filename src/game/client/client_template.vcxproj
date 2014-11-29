@@ -692,6 +692,7 @@ copy "$(TargetDir)"client.dll "C:\Program Files (x86)\Steam\steamapps\common\Sou
     <ClCompile Include="template\GameUI\vslidercontrol.cpp" />
     <ClCompile Include="template\GameUI\vtransitionscreen.cpp" />
     <ClCompile Include="template\GameUI\vvideo.cpp" />
+    <ClCompile Include="template\hud_crosshair_template.cpp" />
     <ClCompile Include="template\hud_damageindicator.cpp" />
     <ClCompile Include="template\hud_developer.cpp" />
     <ClCompile Include="template\hud_weaponselection.cpp" />

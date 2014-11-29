@@ -178,8 +178,8 @@ void InGameMainMenu::OnCommand( const char *command )
 
 		GenericConfirmation::Data_t data;
 
-		data.pWindowTitle = "#Template_SavedGame";
-		data.pMessageText = "#Template_SaveGame_tip";
+		data.pWindowTitle = "#GameUI_ConfirmOverwriteSaveGame_Title";
+		data.pMessageText = "#GameUI_ConfirmOverwriteSaveGame_Info";
 		data.bOkButtonEnabled = true;
 		data.pfnOkCallback = &SavedGameCallback;
 		data.bCancelButtonEnabled = true;
@@ -194,8 +194,8 @@ void InGameMainMenu::OnCommand( const char *command )
 
 		GenericConfirmation::Data_t data;
 
-		data.pWindowTitle = "#Template_LoadLastSave_Confirm";
-		data.pMessageText = "#Template_LoadLastSave_ConfirmMsg";
+		data.pWindowTitle = "#GameUI_ConfirmLoadGame_Title";
+		data.pMessageText = "#GameUI_LoadWarning";
 		data.bOkButtonEnabled = true;
 		data.pfnOkCallback = &LoadGameCallback;
 		data.bCancelButtonEnabled = true;

@@ -16,7 +16,7 @@ FileWeaponInfo_t* CreateWeaponInfo()
 
 CSDKWeaponInfo::CSDKWeaponInfo()
 {
-	m_iPlayerDamage = 0;
+	m_flPlayerDamage = 0;
 }
 
 
@@ -24,7 +24,7 @@ void CSDKWeaponInfo::Parse( KeyValues *pKeyValuesData, const char *szWeaponName 
 {
 	BaseClass::Parse( pKeyValuesData, szWeaponName );
 
-	m_iPlayerDamage = pKeyValuesData->GetInt( "damage", 0 );
+	m_flPlayerDamage = pKeyValuesData->GetInt( "damage", 0 );
 }
 
 

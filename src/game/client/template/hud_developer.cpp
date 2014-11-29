@@ -84,11 +84,14 @@ void CHudDev::ApplySchemeSettings( vgui::IScheme *pScheme )
 
 void CHudDev::Paint()
 {
+
+
 	// Get our scheme and font information
 	vgui::HScheme scheme = vgui::scheme()->GetScheme( "ClientScheme" );
 	vgui::HFont hFont = vgui::scheme()->GetIScheme(scheme)->GetFont( "ClientTitleFont" );
 	vgui::surface()->DrawSetTextFont( hFont );
 	vgui::surface()->DrawSetTextColor( m_TextColor );
+
 
 #ifndef DEBUG
  	wchar_t *tempString = g_pVGuiLocalize->Find("#GameUI_DeveloperMode");
