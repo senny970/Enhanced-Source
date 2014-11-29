@@ -89,12 +89,12 @@ CBaseEntity* FindEntity( edict_t *pEdict, char *classname)
 }
 */
 
-#ifdef SWARM_DLL
 //-----------------------------------------------------------------------------
 // Purpose: Precache game-specific models & sounds
 //-----------------------------------------------------------------------------
 PRECACHE_REGISTER_BEGIN( GLOBAL, ClientGamePrecache )
 	PRECACHE( MODEL, "models/player.mdl");
+
 	PRECACHE( MODEL, "models/gibs/agibs.mdl" );
 	PRECACHE( MODEL, "models/gibs/hgibs.mdl" );
 	PRECACHE( MODEL, "models/gibs/hgibs_spine.mdl" );
@@ -103,6 +103,7 @@ PRECACHE_REGISTER_BEGIN( GLOBAL, ClientGamePrecache )
 	PRECACHE( GAMESOUND, "Player.Death"  );
 	PRECACHE( GAMESOUND, "Player.BurnPain"  );
 
+	PRECACHE( GAMESOUND, "Bullets.DefaultNearmiss" );
 	PRECACHE( GAMESOUND, "FX_RicochetSound.Ricochet" );
 
 	PRECACHE( GAMESOUND, "Geiger.BeepHigh" );
@@ -114,31 +115,6 @@ PRECACHE_REGISTER_END()
 void ClientGamePrecache( void )
 {
 }
-#else
-//-----------------------------------------------------------------------------
-// Purpose: Precache game-specific models & sounds
-//-----------------------------------------------------------------------------
-void ClientGamePrecache( void )
-{
-	CBaseEntity::PrecacheModel("models/player.mdl");
-	CBaseEntity::PrecacheModel( "models/gibs/agibs.mdl" );
-	CBaseEntity::PrecacheModel ("models/weapons/v_hands.mdl");
-
-	CBaseEntity::PrecacheScriptSound( "Player.Death" );
-	CBaseEntity::PrecacheScriptSound( "HUDQuickInfo.LowAmmo" );
-	CBaseEntity::PrecacheScriptSound( "HUDQuickInfo.LowHealth" );
-
-	CBaseEntity::PrecacheScriptSound( "FX_AntlionImpact.ShellImpact" );
-	CBaseEntity::PrecacheScriptSound( "Missile.ShotDown" );
-	CBaseEntity::PrecacheScriptSound( "Bullets.DefaultNearmiss" );
-	CBaseEntity::PrecacheScriptSound( "Bullets.GunshipNearmiss" );
-	CBaseEntity::PrecacheScriptSound( "Bullets.StriderNearmiss" );
-	
-	CBaseEntity::PrecacheScriptSound( "Geiger.BeepHigh" );
-	CBaseEntity::PrecacheScriptSound( "Geiger.BeepLow" );
-}
-#endif
-
 
 // called by ClientKill and DeadThink
 void respawn( CBaseEntity *pEdict, bool fCopyCorpse )

@@ -1461,12 +1461,6 @@
     <ClCompile Include="template\test_entity.cpp">
       <Filter>My Game</Filter>
     </ClCompile>
-    <ClCompile Include="template\basesdkcombatweapon.cpp">
-      <Filter>My Game\Weapons\Bases</Filter>
-    </ClCompile>
-    <ClCompile Include="..\shared\template\basesdkcombatweapon_shared.cpp">
-      <Filter>My Game\Weapons\Bases</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\achievement_saverestore.h">
@@ -3091,12 +3085,6 @@
     </ClInclude>
     <ClInclude Include="spawn_helper_nut.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="template\basesdkcombatweapon.h">
-      <Filter>My Game\Weapons\Bases</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\template\basesdkcombatweapon_shared.h">
-      <Filter>My Game\Weapons\Bases</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
