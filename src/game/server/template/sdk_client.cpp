@@ -93,8 +93,11 @@ CBaseEntity* FindEntity( edict_t *pEdict, char *classname)
 // Purpose: Precache game-specific models & sounds
 //-----------------------------------------------------------------------------
 PRECACHE_REGISTER_BEGIN( GLOBAL, ClientGamePrecache )
+
+	// Player model
 	PRECACHE( MODEL, "models/player.mdl");
 
+	// Gib 
 	PRECACHE( MODEL, "models/gibs/agibs.mdl" );
 	PRECACHE( MODEL, "models/gibs/hgibs.mdl" );
 	PRECACHE( MODEL, "models/gibs/hgibs_spine.mdl" );
