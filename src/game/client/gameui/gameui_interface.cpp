@@ -808,6 +808,9 @@ void CGameUI::OnLevelLoadingFinished(bool bError, const char *failureReason, con
 	// notify all the modules
 	g_VModuleLoader.PostMessageToAllModules( new KeyValues( "LoadingFinished" ) );
 
+	// Need to call this function in the Base mod Panel to let it know that we've finished loading the level
+	// This should fix the loading screen not disappearing.
+	GetUiBaseModPanelClass().OnLevelLoadingFinished(new KeyValues("LoadingFinished"));
 	HideLoadingBackgroundDialog();
 
 

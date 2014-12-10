@@ -44,7 +44,7 @@ public:
 
 	void				SetProgress( float progress );
 	float				GetProgress();
-	bool				IsDoneLoading() { return m_bLoadedFully; };
+	bool				IsDoneLoading() { return true; };
 
 	void				SetLoadingType( LoadingType loadingType );
 	LoadingType			GetLoadingType();

@@ -1421,25 +1421,9 @@ bool CBaseModPanel::UpdateProgressBar( float progress, const char *statusText )
 	// clock the anim at 10hz
 	float time = Plat_FloatTime();
 	float deltaTime = time - s_LastEngineTime;
-	bool AlreadyClosed = false;
+
 	if ( loadingProgress && ( ( loadingProgress->IsDrawingProgressBar() && ( loadingProgress->GetProgress() < progress ) ) || ( deltaTime > 0.06f ) ) )
 	{
-		if (loadingProgress->IsDoneLoading())
-		{
-			OnLevelLoadingFinished( 0 );
-			AlreadyClosed = true;
-			return false;
-		}
-
-		else if ( engine->IsInGame() && engine->IsConnected() && GameUI().IsInLevel() )
-		{
-			if(!AlreadyClosed)
-			{
-				OnLevelLoadingFinished( 0 );
-				return false;
-			}
-		}
-
 		// update progress
 		loadingProgress->SetProgress( progress );
 		s_LastEngineTime = time;
@@ -1448,16 +1432,8 @@ bool CBaseModPanel::UpdateProgressBar( float progress, const char *statusText )
 		{
 			Msg( "[GAMEUI] [GAMEUI] CBaseModPanel::UpdateProgressBar(%.2f %s)\n", loadingProgress->GetProgress(), statusText );
 		}
-		AlreadyClosed = false;
 		return true;
 	}
-
-	/*
-	// HACK! if we are in game and the progress bar is done, close the loading screen.
-	if( loadingProgress->GetProgress() >= 1.0f && GameUI().IsInLevel()|| engine->IsInGame() || engine->IsConnected() )
-	{
-		OnLevelLoadingFinished( 0 );
-	}*/
 
 	// no update required
 	return false;

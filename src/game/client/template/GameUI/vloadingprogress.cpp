@@ -76,8 +76,6 @@ LoadingProgress::LoadingProgress(Panel *parent, const char *panelName, LoadingWi
 	m_bDrawSpinner = false;
 	m_bFullscreenPoster = true;
 
-	m_bLoadedFully = false;
-
 	m_flLastEngineTime = 0;
 
 	// marked to indicate the controls exist
@@ -111,19 +109,6 @@ LoadingProgress::~LoadingProgress()
 void LoadingProgress::OnThink()
 {
 	UpdateWorkingAnim();
-
-	// HACK! if we are in game and the progress bar is done, close the loading screen. ~reep
-	// This is broke in -tools, but for now, this will do.
-	if (!engine->IsInGame() && (GetProgress() >= 0.85f)) //<- any later and this function does not call.
-	{
-		if ( UI_IsDebug() )
-		{
-			Msg( "[GAMEUI] loadingProgress::OnThink() calling OnLevelLoadingFinished\n");
-		}
-
-		m_bLoadedFully = true;
-		//CBaseModPanel::GetSingleton().OnLevelLoadingFinished( 0 );
-	}
 }
 
 //=============================================================================
