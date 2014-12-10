@@ -6,7 +6,7 @@
 
 #include "cbase.h"
 #include "c_sdk_player.h"
-#include "c_basesdkcombatweapon.h"
+#include "weapons/c_basesdkcombatweapon.h"
 #include "playerandobjectenumerator.h"
 #include "engine/ivdebugoverlay.h"
 #include "c_ai_basenpc.h"

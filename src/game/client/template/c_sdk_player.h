@@ -5,7 +5,7 @@
 //=============================================================================
 
 #include "cbase.h"
-#include "c_basesdkcombatweapon.h"
+#include "weapons/c_basesdkcombatweapon.h"
 
 class C_SDKPlayer : public C_BasePlayer
 {
