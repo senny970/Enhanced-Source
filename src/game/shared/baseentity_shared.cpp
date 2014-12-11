@@ -345,6 +345,16 @@ bool CBaseEntity::KeyValue( const char *szKeyName, const char *szValue )
 		return true;
 	}
 
+	if (FStrEq(szKeyName, "disableshadowdepth"))
+	{
+		int val = atoi(szValue);
+		if (val)
+		{
+			AddEffects( EF_NOSHADOWDEPTH );
+		}
+		return true;
+	}
+
 	if ( FStrEq( szKeyName, "mins" ))
 	{
 		Vector mins;
@@ -367,6 +377,16 @@ bool CBaseEntity::KeyValue( const char *szKeyName, const char *szValue )
 		if (val)
 		{
 			AddEffects( EF_NORECEIVESHADOW );
+		}
+		return true;
+	}
+
+	if (FStrEq(szKeyName, "disableflashlight"))
+	{
+		int val = atoi(szValue);
+		if (val)
+		{
+			AddEffects( EF_NOFLASHLIGHT );
 		}
 		return true;
 	}
@@ -567,6 +587,12 @@ bool CBaseEntity::GetKeyValue( const char *szKeyName, char *szValue, int iMaxLen
 		return true;
 	}
 
+	if (FStrEq(szKeyName, "disableshadowdepth"))
+	{
+		Q_snprintf(szValue, iMaxLen, "%d", IsEffectActive(EF_NOSHADOWDEPTH));
+		return true;
+	}
+
 	if ( FStrEq( szKeyName, "mins" ))
 	{
 		Assert( 0 );
@@ -582,6 +608,12 @@ bool CBaseEntity::GetKeyValue( const char *szKeyName, char *szValue, int iMaxLen
 	if ( FStrEq( szKeyName, "disablereceiveshadows" ))
 	{
 		Q_snprintf( szValue, iMaxLen, "%d", IsEffectActive( EF_NORECEIVESHADOW ) );
+		return true;
+	}
+
+	if (FStrEq(szKeyName, "disableflashlight"))
+	{
+		Q_snprintf(szValue, iMaxLen, "%d", IsEffectActive(EF_NOFLASHLIGHT));
 		return true;
 	}
 
