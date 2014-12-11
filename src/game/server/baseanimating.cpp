@@ -61,7 +61,6 @@ class CIKSaveRestoreOps : public CClassPtrSaveRestoreOps
 	}
 };
 
-#if 0
 //-----------------------------------------------------------------------------
 // Relative lighting entity
 //-----------------------------------------------------------------------------
@@ -155,7 +154,6 @@ int CInfoLightingRelative::UpdateTransmitState( void )
 	return SetTransmitState( FL_EDICT_ALWAYS );
 }
 
-#endif
 static CIKSaveRestoreOps s_IKSaveRestoreOp;
 
 
@@ -217,9 +215,6 @@ BEGIN_DATADESC( CBaseAnimating )
 	DEFINE_INPUTFUNC( FIELD_STRING, "SetLightingOriginHack", InputSetLightingOriginRelative ),
 	DEFINE_INPUTFUNC( FIELD_STRING, "SetLightingOrigin", InputSetLightingOrigin ),
 	DEFINE_OUTPUT( m_OnIgnite, "OnIgnite" ),
-
-	DEFINE_INPUTFUNC( FIELD_VOID, "EnableDraw", InputEnableDrawing ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "DisableDraw", InputDisableDrawing ),
 
 	DEFINE_INPUTFUNC( FIELD_VECTOR, "SetModelScale", InputSetModelScale ),
 
@@ -638,26 +633,6 @@ void CBaseAnimating::InputSetLightingOrigin( inputdata_t &inputdata )
 	// Find our specified target
 	string_t strLightingOrigin = MAKE_STRING( inputdata.value.String() );
 	SetLightingOrigin( strLightingOrigin );
-}
-
-// reep: Allow toggling with drawing!
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-// Input  : &inputdata - 
-//-----------------------------------------------------------------------------
-void CBaseAnimating::InputEnableDrawing( inputdata_t& inputdata )
-{ 
-	AddFlag(EF_NODRAW);
-}
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-// Input  : &inputdata - 
-//-----------------------------------------------------------------------------
-void CBaseAnimating::InputDisableDrawing( inputdata_t& inputdata )
-{ 
-	RemoveFlag(EF_NODRAW);
 }
 
 //-----------------------------------------------------------------------------

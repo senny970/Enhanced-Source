@@ -361,9 +361,6 @@ private:
 	void LockStudioHdr();
 	void UnlockStudioHdr();
 
-	void InputEnableDrawing( inputdata_t& inputdata );
-	void InputDisableDrawing( inputdata_t& inputdata );
-
 	void StudioFrameAdvanceInternal( CStudioHdr *pStudioHdr, float flInterval );
 	void InputSetLightingOriginRelative( inputdata_t &inputdata );
 	void InputSetLightingOrigin( inputdata_t &inputdata );

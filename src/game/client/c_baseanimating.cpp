@@ -106,6 +106,43 @@ bool C_AnimationLayer::IsActive( void )
 }
 
 //-----------------------------------------------------------------------------
+// Relative lighting entity
+//-----------------------------------------------------------------------------
+class C_InfoLightingRelative : public C_BaseEntity
+{
+public:
+	DECLARE_CLASS(C_InfoLightingRelative, C_BaseEntity);
+	DECLARE_CLIENTCLASS();
+
+	void GetLightingOffset(matrix3x4_t &offset);
+
+private:
+	EHANDLE			m_hLightingLandmark;
+};
+
+IMPLEMENT_CLIENTCLASS_DT(C_InfoLightingRelative, DT_InfoLightingRelative, CInfoLightingRelative)
+RecvPropEHandle(RECVINFO(m_hLightingLandmark)),
+END_RECV_TABLE()
+
+
+//-----------------------------------------------------------------------------
+// Relative lighting entity
+//-----------------------------------------------------------------------------
+void C_InfoLightingRelative::GetLightingOffset(matrix3x4_t &offset)
+{
+	if (m_hLightingLandmark.Get())
+	{
+		matrix3x4_t matWorldToLandmark;
+		MatrixInvert(m_hLightingLandmark->EntityToWorldTransform(), matWorldToLandmark);
+		ConcatTransforms(EntityToWorldTransform(), matWorldToLandmark, offset);
+	}
+	else
+	{
+		SetIdentityMatrix(offset);
+	}
+}
+
+//-----------------------------------------------------------------------------
 // Base Animating
 //-----------------------------------------------------------------------------
 

@@ -2351,6 +2351,12 @@ BEGIN_DATADESC_NO_BASE( CBaseEntity )
 	DEFINE_INPUTFUNC( FIELD_VOID, "DisableShadow", InputDisableShadow ),
 	DEFINE_INPUTFUNC( FIELD_VOID, "EnableShadow", InputEnableShadow ),
 
+	DEFINE_INPUTFUNC(FIELD_VOID, "DisableDraw", InputDisableDraw),
+	DEFINE_INPUTFUNC(FIELD_VOID, "EnableDraw", InputEnableDraw),
+
+	DEFINE_INPUTFUNC(FIELD_VOID, "DisableReceivingFlashlight", InputDisableReceivingFlashlight),
+	DEFINE_INPUTFUNC(FIELD_VOID, "EnableReceivingFlashlight", InputEnableReceivingFlashlight),
+
 	DEFINE_INPUTFUNC( FIELD_STRING, "AddOutput", InputAddOutput ),
 
 	DEFINE_INPUTFUNC( FIELD_STRING, "FireUser1", InputFireUser1 ),
@@ -7435,6 +7441,34 @@ void CBaseEntity::InputDisableShadow( inputdata_t &inputdata )
 void CBaseEntity::InputEnableShadow( inputdata_t &inputdata )
 {
 	RemoveEffects( EF_NOSHADOW );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void CBaseEntity::InputDisableDraw(inputdata_t &inputdata)
+{
+	AddEffects(EF_NODRAW);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void CBaseEntity::InputEnableDraw(inputdata_t &inputdata)
+{
+	RemoveEffects(EF_NODRAW);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void CBaseEntity::InputDisableReceivingFlashlight(inputdata_t &inputdata)
+{
+	AddEffects(EF_NOFLASHLIGHT);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void CBaseEntity::InputEnableReceivingFlashlight(inputdata_t &inputdata)
+{
+	RemoveEffects(EF_NOFLASHLIGHT);
 }
 
 //-----------------------------------------------------------------------------
