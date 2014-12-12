@@ -62,8 +62,13 @@
 [
 	disableshadows(boolean) : "Disable shadows" : 0
 
+	disableflashlight(boolean) : "Disable flashlight" : 0 : "Used to disable flashlight (env_projectedtexture) lighting and shadows on this entity."
+
 	input DisableShadow(void) : "Turn shadow off."
 	input EnableShadow(void) : "Turn shadow on."
+
+	input DisableReceivingFlashlight(void) : "This object will not recieve light or shadows from projected textures (flashlights)."
+	input EnableReceivingFlashlight(void) : "This object may recieve light or shadows from projected textures (flashlights)."
 ]
 
 @BaseClass base(ToggleDraw, Shadow) = Studiomodel
@@ -82,6 +87,7 @@
 	input DisableShadow(void) : "Turn shadow off."
 	input EnableShadow(void) : "Turn shadow on."
 	input AlternativeSorting(bool) : "Used to attempt to fix sorting problems when rendering. True activates, false deactivates"
+	input SetModelScale(vector) : "Changes the model scale to the specified vector value."
 
 	// Outputs
 	output OnIgnite(void) : "Fired when this object catches fire."
@@ -1213,9 +1219,11 @@
 	holdtime(string) : "Hold Fade (seconds)" : "0" : "The time to hold the faded in/out state."
 	renderamt(integer) : "Fade Alpha" : 255 : "Alpha of the fade, where 0 = fully transparent and 255 = fully opaque." 
 	rendercolor(color255) : "Fade Color (R G B)" : "0 0 0"
+	ReverseFadeDuration(float) : "Reverse Fade Duration (seconds)" : "2" : "The duration of the reverse fade."
 	
 	// Inputs
 	input Fade(void) : "Start the screen fade."
+	input FadeReverse(void) : "Begin doing the reverse of the current fade."
 
 	// Outputs
 	output OnBeginFade(void) : "Fired when the fade has begun."
@@ -2450,7 +2458,10 @@
 
 	// Inputs
 	input Display(void) : "Display the message text."
-	input SetText(string) : "Set the text to display."
+	input SetText(string) : "Set the text to display."	input SetPosX(float) : "Set the X position of the text. (0 - 1.0 = left to right) (-1 centers)"
+	input SetPosY(float) : "Set the Y position of the text. (0 - 1.0 = top to bottom) (-1 centers)"
+	input SetTextColor(color255) : "Set color of the front text."
+	input SetTextColor2(color255) : "Set color of the transition text."
 ]
 
 @PointClass base(Parentname, Angles) size(-2 -2 -2, 2 2 2) = point_enable_motion_fixup : 
@@ -4516,6 +4527,8 @@
 	input Multiply(integer): "Multiply the counter by an amount and fire the OutValue output with the result."
 	input SetValue(integer): "Set the counter to a new value and fire the OutValue output with the result."
 	input SetValueNoFire(integer): "Set the counter to a new value without firing any outputs."
+	input SetMaxValueNoFire(integer): "Set the MaxValue without firing any outputs."
+	input SetValueNoFire(integer): "Set the counter to a new value without firing any outputs."
 	input Subtract(integer): "Subtract an amount from the counter and fire the OutValue output with the result."
 	input SetHitMax(integer): "Set the upper bound of the counter and fire the OutValue output with the current value."
 	input SetHitMin(integer): "Set the lower bound of the counter and fire the OutValue output with the current value."
@@ -6014,9 +6027,19 @@
 	"When it spawns it will automatically rotate to face the next path_track on the path."
 [
 
+	// Inputs
+	input MoveToPathNode(string) : "Start moving to a destination and stop when you get there. This must be in the same path."
+	input TeleportToPathNode(string) : "Teleport to a destination and stop there. This can be in a new path."
+	input LockOrientation(void) : "Lock the current orientation of the train."
+	input UnlockOrientation(void) : "Unlock the current orientation of the train."
+
+	input SetMaxSpeed(float) : "Set a new max speed for the train."
+
 	// Outputs
 	output OnStart(void) : "Fired when the train starts moving in either direction."
 	output OnNext(string) : "Fires when this train picks a new point to move towards (and just after OnStart)."
+
+	output OnArrivedAtDestinationNode(void) : "Fired when this train arrives at a destination that was specified by the MoveToPathNode Input."
 	
 
 ]
@@ -6080,6 +6103,7 @@
 	]
 
 	// Inputs
+	input InTeleport(void) : "???"
 	input ToggleAlternatePath(void) : "Cause the track to toggle to/from its alternate path."
 	input EnableAlternatePath(void) : "Enable the alternate path of the track."
 	input DisableAlternatePath(void) : "Disable the alternate path of the track."
@@ -6090,6 +6114,7 @@
 
 	// Outputs
 	output OnPass(void) : "Fired when any entity following this path passes this path_track node."
+	output OnTeleport(void) : "???"
 ]
 
 
@@ -6619,6 +6644,9 @@
 	input SpotlightTexture(string)		: "Set the spotlight texture"
 	input EnableShadows(bool)		: "Set the if shadows are enabled"
 	input LightColor(color255)		: "Change the light color/brightness"
+
+	input SetNearZ(float) : "Sets the near Z distance."
+	input SetFarZ(float) : "Sets the far Z distance."
 ]
 
 
@@ -6937,4 +6965,9 @@
 	FogName(target_destination) : "Fog Name" : : "The name of the fog entity associated with this volume."
 	PostProcessName(target_destination) : "Postprocess Name" : : "The name of the postprocess entity associated with this volume."
 	ColorCorrectionName(target_destination) : "ColorCorrection Name" : : "The name of the color_correction entity associated with this volume."
+]
+
+@PointClass base(Targetname) iconsprite("editor/game_end.vmt") = game_changelevel : "Level Change Entity"
+[
+	input ChangeLevel(string) : "Changes the level to the map name supplied as a parameter."
 ]

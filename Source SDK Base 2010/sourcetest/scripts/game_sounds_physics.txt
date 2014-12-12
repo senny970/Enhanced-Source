@@ -634,8 +634,8 @@
 	"pitch"			"PITCH_NORM"
 	"rndwave"
 	{
-		"wave"		"physics/glass/glass_sheet_step1.wav"
-		"wave"		"physics/glass/glass_sheet_step2.wav"
+		"wave"		"player/footsteps/glass2.wav"
+		"wave"		"player/footsteps/glass4.wav"
 	}
 }
 
@@ -646,8 +646,8 @@
 	"pitch"			"PITCH_NORM"
 	"rndwave"
 	{
-		"wave"		"physics/glass/glass_sheet_step3.wav"
-		"wave"		"physics/glass/glass_sheet_step4.wav"
+		"wave"		"player/footsteps/glass1.wav"
+		"wave"		"player/footsteps/glass3.wav"
 	}
 }
 
