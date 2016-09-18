@@ -108,9 +108,9 @@ typedef unsigned __int64 ULONGLONG;
 typedef int32 COLORREF;
 #endif
 
-#ifndef INVALID_HANDLE_VALUE
-#define INVALID_HANDLE_VALUE ((HANDLE)-1)
-#endif
+//#ifndef INVALID_HANDLE_VALUE
+//#define INVALID_HANDLE_VALUE ((HANDLE)-1)
+//#endif
 
 /*
 * Internet address (old style... should be updated)
