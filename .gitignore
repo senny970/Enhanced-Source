@@ -17,8 +17,15 @@ ipch
 *.sdf
 *.opensdf
 *.idb
-#*.vcxproj
-#*.sln
+*.vcxproj
+*.vcxproj.filters
+*.sln
+*.vpc_crc
+*.vpc.sentinel
+*.VC
+*.VC.VC.opendb
+*.VC.db
+*.pdb
 
 # shader files
 *.tmp

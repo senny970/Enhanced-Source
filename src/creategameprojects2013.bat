@@ -1,0 +1,1 @@
+devtools\bin\vpc.exe /template +game /mksln Game_Template-2013.sln /2013

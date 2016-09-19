@@ -1395,8 +1395,6 @@ int CVisibleShadowList::FindShadows( const CViewSetup *pView, int nLeafCount, Wo
 // sniff the command line parameters, etc. to determine how many shadow rt's and their dimensions
 void CClientShadowMgr::CalculateRenderTargetsAndSizes( void )
 {
-	bool bTools = CommandLine()->CheckParm( "-tools" ) != NULL;
-		
 	m_nDepthTextureResolution = r_flashlightdepthres.GetInt();
 	m_nDepthTextureResolutionHigh = r_flashlightdepthreshigh.GetInt();
 	m_nMaxDepthTextureShadows = 10;
