@@ -1373,6 +1373,7 @@ bool C_BasePlayer::ShouldDraw()
 
 int C_BasePlayer::DrawModel( int flags, const RenderableInstance_t &instance )
 {
+#ifndef PORTAL
 	// if local player is spectating this player in first person mode, don't draw it
 	C_BasePlayer * player = C_BasePlayer::GetLocalPlayer();
 
@@ -1383,6 +1384,7 @@ int C_BasePlayer::DrawModel( int flags, const RenderableInstance_t &instance )
 			 !input->CAM_IsThirdPerson() )
 			return 0;
 	}
+#endif
 
 	return BaseClass::DrawModel( flags, instance );
 }

@@ -65,10 +65,11 @@ void C_BaseCombatWeapon::NotifyShouldTransmit( ShouldTransmitState_t state )
 
 static inline bool ShouldDrawLocalPlayer( C_BasePlayer *pl )
 {
-
-	Assert( pl );
-	return pl->ShouldDrawLocalPlayer();
-
+#if defined( PORTAL )
+	return false;
+#else
+	return !pl->ShouldDrawLocalPlayer();
+#endif
 }
 
 //-----------------------------------------------------------------------------
