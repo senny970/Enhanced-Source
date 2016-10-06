@@ -454,9 +454,11 @@ public:
 	virtual int						Restore( IRestore &restore );
 
 private:
-
 	int SaveDataDescBlock( ISave &save, datamap_t *dmap );
 	int RestoreDataDescBlock( IRestore &restore, datamap_t *dmap );
+
+	void OnDisableShadowDepthRenderingChanged();
+	void OnShadowDepthRenderingCacheableStateChanged();
 
 public:
 
