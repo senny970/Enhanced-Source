@@ -18,6 +18,14 @@
 #include "baseviewmodel_shared.h"
 #include "weapon_proficiency.h"
 
+#ifndef PORTAL
+// HACK, Should come from game specific enum...
+#define WEAPON_MAX 32   
+#else
+#include "shareddefs.h"
+#endif
+
+
 #if defined( CLIENT_DLL )
 #define CBaseCombatWeapon C_BaseCombatWeapon
 #endif

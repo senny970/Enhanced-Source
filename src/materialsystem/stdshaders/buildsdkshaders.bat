@@ -7,11 +7,11 @@ rem == Setup path to nmake.exe, from vc 2005 common tools directory ==
 
 rem Use the compile tools appropriate to your Visual Studio version
 rem Visual Studio 2010
-call "%VS100COMNTOOLS%vsvars32.bat"
+rem call "%VS100COMNTOOLS%vsvars32.bat"
 rem Visual Studio 2012
 rem call "%VS110COMNTOOLS%vsvars32.bat"
 rem Visual Studio 2013
-rem call "%VS120COMNTOOLS%vsvars32.bat"
+call "%VS120COMNTOOLS%vsvars32.bat"
 
 rem ================================
 rem ==== MOD PATH CONFIGURATIONS ===
@@ -21,17 +21,16 @@ rem == Note that this path needs does not support long file/directory names ==
 rem == So instead of a path such as "C:\Program Files\Steam\steamapps\mymod" ==
 rem == you need to find the 8.3 abbreviation for the directory name using 'dir /x' ==
 rem == and set the directory to something like C:\PROGRA~2\Steam\steamapps\sourcemods\mymod ==
-set GAMEDIR="..\..\..\Source SDK Base 2010\template"
+set GAMEDIR=C:\Users\Akubi\DOCUME~1\GitHub\SOURCE~1\SOURCE~1\portal
 
 rem == Set the relative path to steamapps\common\Alien Swarm\bin ==
 rem == As above, this path does not support long directory names or spaces ==
 rem == e.g. ..\..\..\..\..\PROGRA~2\Steam\steamapps\common\ALIENS~1\bin ==
-set SDKBINDIR="..\..\..\Source SDK Base 2010\bin"
+set SDKBINDIR=..\..\..\SOURCE~1\bin
 
 rem ==  Set the Path to your mods root source code ==
 rem this should already be correct, accepts relative paths only!
 set SOURCEDIR=..\..
-
 rem ==== MOD PATH CONFIGURATIONS END ===
 rem ====================================
 
@@ -58,7 +57,7 @@ set BUILD_SHADER=call buildshaders.bat
 set ARG_EXTRA=
 
 %BUILD_SHADER% stdshader_dx9_20b		-game %GAMEDIR% -source %SOURCEDIR%
-%BUILD_SHADER% stdshader_dx9_20b_new		-game %GAMEDIR% -source %SOURCEDIR% -dx9_30
+%BUILD_SHADER% stdshader_dx9_20b_new	-game %GAMEDIR% -source %SOURCEDIR% -dx9_30
 %BUILD_SHADER% stdshader_dx9_30			-game %GAMEDIR% -source %SOURCEDIR% -dx9_30	-force30 
 
 

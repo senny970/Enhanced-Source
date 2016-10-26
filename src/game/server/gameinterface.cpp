@@ -2900,7 +2900,10 @@ int TestAreaPortalVisibilityThroughPortals(CFuncAreaPortalBase* pAreaPortal, edi
 				bool bIsOpenOnClient = true;
 				float fovDistanceAdjustFactor = 1.0f;
 				Vector portalOrg = pLocalPortal->GetAbsOrigin();
-				int iPortalNeedsThisPortalOpen = pAreaPortal->UpdateVisibility(portalOrg, fovDistanceAdjustFactor, bIsOpenOnClient);
+				// TODO(Joshua): Optimise this!
+				CUtlVector<Vector> portalOrgVector;
+				portalOrgVector.AddToTail(portalOrg);
+				int iPortalNeedsThisPortalOpen = pAreaPortal->UpdateVisibility(portalOrgVector, fovDistanceAdjustFactor, bIsOpenOnClient);
 
 				// Stop checking on success, this portal needs to be open
 				if (iPortalNeedsThisPortalOpen)

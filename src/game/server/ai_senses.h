@@ -114,7 +114,9 @@ protected:
 	void			EndGather( int nSeen, CUtlVector<EHANDLE> *pResult );
 	
 	bool 			Look( CBaseEntity *pSightEnt );
-
+#ifdef PORTAL
+	bool 			LookThroughPortal(const CProp_Portal *pPortal, CBaseEntity *pSightEnt);
+#endif
 
 	virtual int 	LookForHighPriorityEntities( int iDistance );
 	int 			LookForNPCs( int iDistance );

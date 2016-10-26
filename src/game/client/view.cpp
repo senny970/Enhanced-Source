@@ -44,18 +44,14 @@
 #ifdef GAMEUI_UISYSTEM2_ENABLED
 #include "gameui.h"
 #endif
-#ifdef GAMEUI_EMBEDDED
 
-#if defined( TEMPLATE_DLL )
-#include "template/gameui/basemodpanel.h"
-#elif defined ( SWARM_DLL )
-#include "swarm/gameui/swarm/basemodpanel.h"
+#ifdef GAMEUI_EMBEDDED
+#if !defined( INFESTED_DLL )
+#include "gameui/basemodpanel.h"
 #else
-#error "GAMEUI_EMBEDDED"
-#endif
-#endif
-#ifdef INFESTED_DLL
+#include "swarm/gameui/swarm/basemodpanel.h"
 #include "c_asw_marine.h"
+#endif
 #endif
 
 #if defined( HL2_CLIENT_DLL ) || defined( INFESTED_DLL )

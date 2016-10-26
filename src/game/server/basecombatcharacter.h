@@ -22,10 +22,7 @@
 #include <limits.h>
 #include "weapon_proficiency.h"
 
-
-// HACK, Should come from game specific enum...
-#define WEAPON_MAX 32   
-
+#include "basecombatweapon_shared.h"
 
 class CScriptedTarget;
 typedef CHandle<CBaseCombatWeapon> CBaseCombatWeaponHandle;

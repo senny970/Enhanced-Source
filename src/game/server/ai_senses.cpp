@@ -399,6 +399,9 @@ int CAI_Senses::LookForHighPriorityEntities( int iDistance )
 		
 		BeginGather();
 	
+#ifdef PORTAL
+		float distSq = (iDistance * iDistance);
+#endif
 		const Vector &origin = GetAbsOrigin();
 		
 		// Players

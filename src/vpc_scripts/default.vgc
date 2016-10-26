@@ -1,6 +1,7 @@
 $Games
 {
 	"TEMPLATE"
+	"PORTAL"
 }
 
 $Conditional	"SOURCESDK" "1"

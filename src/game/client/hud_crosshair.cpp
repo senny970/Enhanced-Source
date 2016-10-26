@@ -76,9 +76,9 @@ bool CHudCrosshair::ShouldDraw( void )
 		return false;
 
 #ifdef PORTAL
-	C_Portal_Player *portalPlayer = ToPortalPlayer(pPlayer);
+	/*C_Portal_Player *portalPlayer = ToPortalPlayer(pPlayer);
 	if (portalPlayer && portalPlayer->IsSuppressingCrosshair())
-		return false;
+		return false;*/
 #endif // PORTAL
 
 	/* disabled to avoid assuming it's an HL2 player.

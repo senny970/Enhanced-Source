@@ -13,7 +13,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;.\hl2;.\template;.\template\vgui;.\gameui;$SRCDIR\game\client\template\gameui;..\statemachine;$SRCDIR\game\shared\template\multiplayer;.\template\multiplayer;$SRCDIR\game\shared\template"
+		$AdditionalIncludeDirectories	"$BASE;.\hl2;.\template;.\template\vgui;.\gameui;$SRCDIR\game\client\template\gameui;..\statemachine;$SRCDIR\game\shared\multiplayer;.\multiplayer;$SRCDIR\game\shared\template"
 		$PreprocessorDefinitions		"$BASE;SWARM_DLL;TEMPLATE_DLL;GAMEUI_EMBEDDED;GAMEUI_EXPORTS"
 	}
 }

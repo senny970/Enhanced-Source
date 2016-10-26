@@ -996,8 +996,8 @@ int CBeam::DrawModel( int flags, const RenderableInstance_t &instance )
 		return 0;
 
 #ifdef PORTAL
-	if ((!g_pPortalRender->IsRenderingPortal() && !m_bDrawInMainRender) ||
-		(g_pPortalRender->IsRenderingPortal() && !m_bDrawInPortalRender))
+	if ((!GetPortalRender().IsRenderingPortal() && !m_bDrawInMainRender) ||
+		(GetPortalRender().IsRenderingPortal() && !m_bDrawInPortalRender))
 	{
 		return 0;
 	}

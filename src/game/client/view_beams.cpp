@@ -431,8 +431,8 @@ extern ConVar r_drawviewmodel;
 int Beam_t::DrawModel( int flags, const RenderableInstance_t &instance )
 {
 #ifdef PORTAL
-	if ((!g_pPortalRender->IsRenderingPortal() && !m_bDrawInMainRender) ||
-		(g_pPortalRender->IsRenderingPortal() && !m_bDrawInPortalRender))
+	if ((!GetPortalRender().IsRenderingPortal() && !m_bDrawInMainRender) ||
+		(GetPortalRender().IsRenderingPortal() && !m_bDrawInPortalRender))
 	{
 		return 0;
 	}
@@ -2263,7 +2263,7 @@ void CViewRenderBeams::DrawBeam( C_Beam* pbeam, const RenderableInstance_t &inst
 
 			// Draw the sub beam
 			bBeamDrawingThroughPortal = true;
-			DrawBeam(pbeam, pEntityBeamTraceFilter);
+			DrawBeam(pbeam, instance, pEntityBeamTraceFilter);
 			bBeamDrawingThroughPortal = true;
 
 			// Restore the original values
