@@ -3,6 +3,8 @@ $Group "game"
 	"client"
 	"server"
 	"missionchooser"
+	"shaderlib"
+	"game_shader"
 }
 
 $Group "shaders"
@@ -17,5 +19,5 @@ $Group "everything"
 	"server"
 	"missionchooser"
 	"shaderlib"
-//	"game_shader"
+	"game_shader"
 }

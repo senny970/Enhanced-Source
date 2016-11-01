@@ -915,6 +915,10 @@ enum Class_T
 #define NUM_SHARED_FACTIONS			(FACTION_NONE + 1)
 
 // Our Game-based shareddefs go here.
+#ifndef PORTAL
 #include "my_shareddefs.h"
+#else
+#include "portal_shareddefs.h"
+#endif
 
 #endif // SHAREDDEFS_H

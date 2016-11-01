@@ -1,12 +1,20 @@
 $Project "client"
 {
 	"game\client\client_template.vpc"	[$TEMPLATE]
+	"game\client\client_portal.vpc"		[$PORTAL]
 }
 
 $Project "server"
 {
 	"game\server\server_template.vpc"	[$TEMPLATE]
+	"game\server\server_portal.vpc"		[$PORTAL]
 }
+
+
+$Project "missionchooser"
+{
+}
+
 
 $Project "shaderlib"
 {
@@ -15,5 +23,5 @@ $Project "shaderlib"
 
 $Project "game_shader"
 {
-	//"materialsystem\stdshaders\game_shader_dx9.vpc"
+	"materialsystem\stdshaders\game_shader_dx9_portal.vpc"	[$PORTAL]
 }

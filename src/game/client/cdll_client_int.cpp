@@ -106,15 +106,13 @@
 #ifdef GAMEUI_UISYSTEM2_ENABLED
 #include "gameui.h"
 #endif
-#ifdef GAMEUI_EMBEDDED
 
-#if defined( TEMPLATE_DLL )
-#include "template/gameui/basemodpanel.h"
-#elif defined ( SWARM_DLL )
-#include "swarm/gameui/swarm/basemodpanel.h"
-#else
-#error "GAMEUI_EMBEDDED"
-#endif
+#ifdef GAMEUI_EMBEDDED
+	#if !defined( INFESTED_DLL )
+	#include "gameui/basemodpanel.h"
+	#else
+	#include "swarm/gameui/swarm/basemodpanel.h"
+	#endif
 #endif
 
 #ifdef DEMOPOLISH_ENABLED
@@ -127,7 +125,9 @@
 #include "c_rumble.h"
 #include "viewpostprocess.h"
 
-
+#ifdef PORTAL
+#include "PortalRender.h"
+#endif
 
 #ifdef INFESTED_PARTICLES
 #include "c_asw_generic_emitter.h"
@@ -2366,7 +2366,9 @@ void OnRenderStart()
 	MDLCACHE_CRITICAL_SECTION();
 	MDLCACHE_COARSE_LOCK();
 
-
+#ifdef PORTAL
+	GetPortalRender().UpdatePortalPixelVisibility(); //updating this one or two lines before querying again just isn't cutting it. Update as soon as it's cheap to do so.
+#endif
 
 	partition->SuppressLists( PARTITION_ALL_CLIENT_EDICTS, true );
 	C_BaseEntity::SetAbsQueriesValid( false );

@@ -456,9 +456,9 @@ void CPixelVisibilityQuery::IssueQuery( IMatRenderContext *pRenderContext, float
 		}
 	}
 
-	// In split screen we can issue these multiple times
-	Assert( m_frameIssued != gpGlobals->framecount);
-
+#ifndef PORTAL // FIXME: In portal we query visibility multiple times per frame because of portal renders!
+	Assert((m_frameIssued != gpGlobals->framecount) || UseVR());
+#endif
 
 	m_frameIssued = gpGlobals->framecount;
 	m_wasQueriedThisFrame = false;
