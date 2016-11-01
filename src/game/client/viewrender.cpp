@@ -4197,6 +4197,7 @@ static void DrawClippedDepthBox( IClientRenderable *pEnt, float *pClipPlane )
 
 static inline bool BlurTest( IClientRenderable *pRenderable, int drawFlags, bool bPreDraw, const RenderableInstance_t &instance )
 {
+#ifndef PORTAL
 	if( CurrentViewID() == VIEW_MONITOR )
 		return false;
 
@@ -4222,6 +4223,9 @@ static inline bool BlurTest( IClientRenderable *pRenderable, int drawFlags, bool
 	}
 
 	return false;
+#else
+	return false;
+#endif
 }
 
 

@@ -56,7 +56,7 @@ public:
 	virtual void	GetRenderBoundsWorldspace( Vector& mins, Vector& maxs );
 
 	// These normally call through to GetRenderAngles/GetRenderBounds, but some entities custom implement them.
-	virtual void	GetShadowRenderBounds( Vector &mins, Vector &maxs, ShadowType_t shadowType );
+	virtual void	GetShadowRenderBounds( Vector &mins, Vector &maxs, ShadowType_t shadowType  );
 
 	// These methods return true if we want a per-renderable shadow cast direction + distance
 	//virtual bool	GetShadowCastDistance( float *pDist, ShadowType_t shadowType ) const;
@@ -78,8 +78,6 @@ public:
 
 	// Get the model instance of the ghosted model so that decals will properly draw across portals
 	virtual ModelInstanceHandle_t GetModelInstance();
-
-
 
 	//------------------------------------------
 	//IClientRenderable - Trivial or redirection

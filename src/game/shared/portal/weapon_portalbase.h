@@ -59,6 +59,8 @@ public:
 	CPortalSWeaponInfo const	&GetPortalWpnData() const;
 
 
+
+
 	virtual void FireBullets( const FireBulletsInfo_t &info );
 	
 public:

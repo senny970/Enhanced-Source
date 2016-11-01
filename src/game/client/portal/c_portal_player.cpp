@@ -22,7 +22,9 @@
 #include "portal_shareddefs.h"
 #include "ivieweffects.h"		// for screenshake
 #include "prop_portal_shared.h"
-
+#include "cam_thirdperson.h"
+#include "iinput.h"
+#include "input.h"
 
 // Don't alias here
 #if defined( CPortal_Player )
@@ -325,6 +327,9 @@ C_Portal_Player::C_Portal_Player()
 	m_blinkTimer.Invalidate();
 
 	m_CCDeathHandle = INVALID_CLIENT_CCHANDLE;
+
+	ConVarRef scissor("r_flashlightscissor");
+	scissor.SetValue("0");
 }
 
 C_Portal_Player::~C_Portal_Player( void )

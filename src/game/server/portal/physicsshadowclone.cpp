@@ -133,6 +133,8 @@ void CPhysicsShadowClone::Spawn( void )
 
 	FullSync( false );
 	m_bInAssumedSyncState = false;
+
+	SetSolid(SOLID_VPHYSICS);
 	
 	BaseClass::Spawn();
 

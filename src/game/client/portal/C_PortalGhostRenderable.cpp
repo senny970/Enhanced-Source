@@ -22,7 +22,7 @@ C_PortalGhostRenderable::C_PortalGhostRenderable( C_Prop_Portal *pOwningPortal, 
 
 	cl_entitylist->AddNonNetworkableEntity( GetIClientUnknown() );
 	// TODO(Joshua): I don't think we want to render with viewmodels, but check later!
-	g_pClientLeafSystem->AddRenderable( this, false, RenderableTranslucencyType_t::RENDERABLE_IS_TWO_PASS, RenderableModelType_t::RENDERABLE_MODEL_ENTITY );
+	g_pClientLeafSystem->AddRenderable( this, false, pGhostSource->ComputeTranslucencyType(), RenderableModelType_t::RENDERABLE_MODEL_ENTITY );
 }
 
 C_PortalGhostRenderable::~C_PortalGhostRenderable( void )
@@ -54,6 +54,8 @@ void C_PortalGhostRenderable::PerFrameUpdate( void )
 		}
 	}
 
+	SetSolid(SOLID_VPHYSICS);
+	SetSize(m_pGhostedRenderable->CollisionProp()->OBBMins(), m_pGhostedRenderable->CollisionProp()->OBBMaxs());
 
 	// Set position and angles relative to the object it's ghosting
 	Vector ptNewOrigin = m_matGhostTransform * m_pGhostedRenderable->GetAbsOrigin();		
@@ -324,7 +326,6 @@ int C_PortalGhostRenderable::LookupAttachment( const char *pAttachmentName )
 {
 	if( m_pGhostedRenderable == NULL )
 		return -1;
-
 
 	return m_pGhostedRenderable->LookupAttachment( pAttachmentName );
 }

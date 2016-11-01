@@ -445,7 +445,6 @@ IClientModelRenderable*	C_BaseCombatWeapon::GetClientModelRenderable()
 	return this;
 }
 
-
 //-----------------------------------------------------------------------------
 // Purpose: Render the weapon. Draw the Viewmodel if the weapon's being carried
 //			by this player, otherwise draw the worldmodel.
@@ -453,6 +452,7 @@ IClientModelRenderable*	C_BaseCombatWeapon::GetClientModelRenderable()
 int C_BaseCombatWeapon::DrawModel( int flags, const RenderableInstance_t &instance )
 {
 	VPROF_BUDGET( "C_BaseCombatWeapon::DrawModel", VPROF_BUDGETGROUP_MODEL_RENDERING );
+
 	if ( !m_bReadyToDraw )
 		return 0;
 
@@ -484,6 +484,7 @@ int C_BaseCombatWeapon::DrawModel( int flags, const RenderableInstance_t &instan
 // Otherwise, if we're not the local player, always use the world model
 void C_BaseCombatWeapon::EnsureCorrectRenderingModel()
 {
+#ifndef PORTAL
 	C_BasePlayer *localplayer = C_BasePlayer::GetLocalPlayer();
 	if ( localplayer && 
 		localplayer == GetOwner() &&
@@ -491,6 +492,7 @@ void C_BaseCombatWeapon::EnsureCorrectRenderingModel()
 	{
 		return;
 	}
+#endif
 
 	// BRJ 10/14/02
 	// FIXME: Remove when Yahn's client-side prediction is done

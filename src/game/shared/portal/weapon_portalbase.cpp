@@ -101,6 +101,9 @@ CWeaponPortalBase::CWeaponPortalBase()
 	AddSolidFlags( FSOLID_TRIGGER ); // Nothing collides with these but it gets touches.
 
 	m_flNextResetCheckTime = 0.0f;
+#ifdef CLIENT_DLL
+	m_bCanUseFastPath = false;
+#endif
 }
 
 
@@ -145,17 +148,18 @@ void CWeaponPortalBase::OnDataChanged( DataUpdateType_t type )
 {
 	BaseClass::OnDataChanged( type );
 
+	m_bCanUseFastPath = false;
+
 	if ( GetPredictable() && !ShouldPredict() )
 		ShutdownPredictable();
 }
 
 int CWeaponPortalBase::DrawModel( int flags, const RenderableInstance_t& instance)
 {
-	if ( !m_bReadyToDraw )
+	if (!m_bReadyToDraw)
 		return 0;
 
-	C_Portal_Player* pPlayer = (C_Portal_Player*)GetOwner();
-	if (pPlayer && (pPlayer == C_BasePlayer::GetLocalPlayer()) && !GetPortalRender().IsRenderingPortal() && !pPlayer->ShouldDrawLocalPlayer())
+	if (GetOwner() && (GetOwner() == C_BasePlayer::GetLocalPlayer()) && !GetPortalRender().IsRenderingPortal() && !((CBasePlayer*)(GetOwner()))->ShouldDrawLocalPlayer())
 		return 0;
 
 	//Sometimes the return value of ShouldDrawLocalPlayer() fluctuates too often to draw the correct model all the time, so this is a quick fix if it's changed too fast
@@ -163,35 +167,32 @@ int CWeaponPortalBase::DrawModel( int flags, const RenderableInstance_t& instanc
 	bool bChangeModelBack = false;
 
 	int iWorldModelIndex = GetWorldModelIndex();
-	if( iOriginalIndex != iWorldModelIndex )
+	if (iOriginalIndex != iWorldModelIndex)
 	{
-		SetModelIndex( iWorldModelIndex );
+		SetModelIndex(iWorldModelIndex);
 		bChangeModelBack = true;
 	}
 
-	int iRetVal = BaseClass::DrawModel( flags, instance );
+	int iRetVal = BaseClass::DrawModel(flags, instance);
 
-	if( bChangeModelBack )
-		SetModelIndex( iOriginalIndex );
+	if (bChangeModelBack)
+		SetModelIndex(iOriginalIndex);
 
 	return iRetVal;
 }
 
-bool CWeaponPortalBase::ShouldDraw( void )
+bool CWeaponPortalBase::ShouldDraw(void)
 {
-	if (!GetOwner() || GetOwner() != C_BasePlayer::GetLocalPlayer())
+	if ( !GetOwner() || GetOwner() != C_BasePlayer::GetLocalPlayer() )
 		return true;
 
-	if (!IsActiveByLocalPlayer())
+	if ( !IsActiveByLocalPlayer() )
 		return false;
-
-	if (GetPortalRender().IsRenderingPortal() || GetPortalRender().GetViewRecursionLevel() > 0)
-		return true;
 
 	//if ( GetOwner() && GetOwner() == C_BasePlayer::GetLocalPlayer() && materials->GetRenderTarget() == 0 )
 	//	return false;
 
-	return false;
+	return true;
 }
 
 bool CWeaponPortalBase::ShouldPredict()
