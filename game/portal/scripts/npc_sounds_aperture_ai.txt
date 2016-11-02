@@ -2255,3 +2255,10 @@
 	"wave"		"vo/aperture_ai/escape_nags_08.wav"
 }
 
+"Portal.PartyEscortAssociate"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_NONE"
+	"wave"		"npc/PartyEscort.wav"
+}

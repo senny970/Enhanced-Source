@@ -38,6 +38,9 @@
 #define PORTAL_PLAYER_MAX_LIFT_MASS 85
 #define PORTAL_PLAYER_MAX_LIFT_SIZE 128
 
+// If you want to use P2 Chell, comment this define out! ~reep
+//#define PORTAL_OLD
+
 extern CBaseEntity	*g_pLastSpawn;
 
 extern void respawn(CBaseEntity *pEdict, bool fCopyCorpse);
@@ -134,10 +137,6 @@ BEGIN_DATADESC( CPortalRagdoll )
 	DEFINE_FIELD( m_vecRagdollVelocity, FIELD_VECTOR ),
 
 END_DATADESC()
-
-
-
-
 
 LINK_ENTITY_TO_CLASS( player, CPortal_Player );
 
@@ -1348,7 +1347,7 @@ bool CPortal_Player::UseFoundEntity( CBaseEntity *pUseEntity )
 		// Robin: Don't play sounds for NPCs, because NPCs will allow respond with speech.
 		if ( !pUseEntity->MyNPCPointer() )
 		{
-			EmitSound( "HL2Player.Use" );
+			EmitSound( "Player.Use" );
 		}
 	}
 

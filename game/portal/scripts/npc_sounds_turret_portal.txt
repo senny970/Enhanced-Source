@@ -20,29 +20,7 @@
 		"wave"			"npc/turret_floor/turret_active_8.wav"
 	}
 
-	"soundentry_version" "2"
-
-	"operator_stacks"
-	{
-		"start_stack"
-		{
-			"import_stack" 	"P2_exclusion_time_and_poly_limiting_start"
-
-			"limit_sound"
-			{
-				"match_entry" "NPC_FloorTurret.TalkActive"
-				"input_max_entries" "1.000000"
-				"match_substring" "false"
-			}
-				
-			"block_entries"
-			{
-				
-				"match_entry" "NPC_FloorTurret.TalkActive" //The sound entry to use
-				"input_duration" "0.1" //in seconds
-			}
-		}
-	}	
+	
 }
 
 "NPC_FloorTurret.TalkAutosearch"
@@ -124,7 +102,7 @@
 
 "NPC_FloorTurret.TalkPickup"
 {
-	"channel"		"CHAN_AUTO"
+	"channel"		"CHAN_VOICE"
 	"volume"		"VOL_NORM"
 	"pitch"			"PITCH_NORM"
 

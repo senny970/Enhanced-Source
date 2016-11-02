@@ -418,14 +418,16 @@ void CHL2_Player::Precache( void )
 {
 	BaseClass::Precache();
 
+	// 11-1-16: I made the use sounds read scripts that already exist.
+	// We need this so the portal player works correctly. ~reep
 	PrecacheScriptSound( "HL2Player.SprintNoPower" );
 	PrecacheScriptSound( "HL2Player.SprintStart" );
-	PrecacheScriptSound( "HL2Player.UseDeny" );
+	PrecacheScriptSound( "Player.UseDeny" ); // "HL2Player.UseDeny"
 	PrecacheScriptSound( "HL2Player.FlashLightOn" );
 	PrecacheScriptSound( "HL2Player.FlashLightOff" );
 	PrecacheScriptSound( "HL2Player.PickupWeapon" );
 	PrecacheScriptSound( "HL2Player.TrainUse" );
-	PrecacheScriptSound( "HL2Player.Use" );
+	PrecacheScriptSound( "Player.Use" ); // "HL2Player.Use"
 	PrecacheScriptSound( "HL2Player.BurnPain" );
 }
 
@@ -1594,7 +1596,7 @@ void CHL2_Player::CommanderExecute( CommanderCommand_t command )
 
 	if ( !pPlayerSquadLeader )
 	{
-		EmitSound( "HL2Player.UseDeny" );
+		EmitSound( "Player.UseDeny" );
 		return;
 	}
 
@@ -1628,7 +1630,7 @@ void CHL2_Player::CommanderExecute( CommanderCommand_t command )
 		// Find a goal for ourselves.
 		if( !CommanderFindGoal( &goal ) )
 		{
-			EmitSound( "HL2Player.UseDeny" );
+			EmitSound( "Player.UseDeny" );
 			return; // just keep following
 		}
 	}
@@ -2843,7 +2845,7 @@ void CHL2_Player::PlayerUse ( void )
 			// Robin: Don't play sounds for NPCs, because NPCs will allow respond with speech.
 			if ( !pUseEntity->MyNPCPointer() )
 			{
-				EmitSound( "HL2Player.Use" );
+				EmitSound( "Player.Use" );
 			}
 		}
 
@@ -3590,7 +3592,7 @@ void CHL2_Player::ItemPostFrame()
 	if ( m_bPlayUseDenySound )
 	{
 		m_bPlayUseDenySound = false;
-		EmitSound( "HL2Player.UseDeny" );
+		EmitSound( "Player.UseDeny" );
 	}
 }
 
