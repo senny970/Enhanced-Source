@@ -1776,6 +1776,18 @@ bool C_BaseEntity::GetShadowCastDistance( float *pDistance, ShadowType_t shadowT
 	return false;
 }
 
+void C_BaseEntity::OnDisableShadowDepthRenderingChanged()
+{
+	bool bIsShadowDepthRenderingDisabled = IsEffectActive(EF_NOSHADOWDEPTH);
+	g_pClientLeafSystem->DisableShadowDepthRendering(m_hRender, bIsShadowDepthRenderingDisabled);
+}
+
+void C_BaseEntity::OnShadowDepthRenderingCacheableStateChanged()
+{
+	bool bIsShadowDepthRenderingCacheDisabled = IsEffectActive(EF_SHADOWDEPTH_NOCACHE);
+	g_pClientLeafSystem->DisableShadowDepthCaching(m_hRender, bIsShadowDepthRenderingCacheDisabled);
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
@@ -1785,7 +1797,7 @@ C_BaseEntity *C_BaseEntity::GetShadowUseOtherEntity( void ) const
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: 
+// Purpose: EF_SHADOWDEPTH_NOCACHE
 //-----------------------------------------------------------------------------
 void C_BaseEntity::SetShadowUseOtherEntity( C_BaseEntity *pEntity )
 {

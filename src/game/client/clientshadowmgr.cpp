@@ -133,15 +133,15 @@ static ConVar r_shadow_debug_spew( "r_shadow_debug_spew", "0", FCVAR_CHEAT );
 ConVar r_flashlightdepthtexture( "r_flashlightdepthtexture", "1" );
 
 #if defined( _X360 )
-ConVar r_flashlightdepthreshigh( "r_flashlightdepthreshigh", "512" );
+ConVar r_flashlightdepthreshigh( "r_flashlightdepthreshigh", "720" );
 #else
-ConVar r_flashlightdepthreshigh( "r_flashlightdepthreshigh", "8192" );
+ConVar r_flashlightdepthreshigh( "r_flashlightdepthreshigh", "4096" ); //8192
 #endif
 
 #if defined( _X360 )
-ConVar r_flashlightdepthres( "r_flashlightdepthres", "512" );
+ConVar r_flashlightdepthres( "r_flashlightdepthres", "720" );
 #else
-ConVar r_flashlightdepthres( "r_flashlightdepthres", "4096" );
+ConVar r_flashlightdepthres("r_flashlightdepthres", "4096", FCVAR_ARCHIVE, "Flashlight depth resolution");
 #endif
 
 #if defined( _X360 )
