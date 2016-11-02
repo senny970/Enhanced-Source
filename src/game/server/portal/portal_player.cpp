@@ -305,7 +305,8 @@ void CPortal_Player::Precache( void )
 	PrecacheModel( g_pszPlayerModel );
 	PrecacheModel( g_pszChellModel );
 
-	PrecacheScriptSound( "NPC_Citizen.die" );
+	// This is left over code. Ignore. ~reep
+	//PrecacheScriptSound( "NPC_Citizen.die" );
 }
 
 void CPortal_Player::CreateSounds()
@@ -1347,7 +1348,7 @@ bool CPortal_Player::UseFoundEntity( CBaseEntity *pUseEntity )
 		// Robin: Don't play sounds for NPCs, because NPCs will allow respond with speech.
 		if ( !pUseEntity->MyNPCPointer() )
 		{
-			EmitSound( "Player.Use" );
+			EmitSound( "HL2Player.Use" );
 		}
 	}
 
