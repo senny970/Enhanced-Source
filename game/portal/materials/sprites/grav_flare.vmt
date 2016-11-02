@@ -1,7 +1,7 @@
-"UnlitGeneric"
+UnlitGeneric
 {
-	"$basetexture" "sprites/grav_flare"
-	"$additive" 1
-	"$vertexcolor" 1
-	"$vertexalpha" 1
+$basetexture "sprites/grav_flare"
+$additive 1
+$vertexcolor 1
+$vertexalpha 1
 }

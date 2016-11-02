@@ -1,1 +1,1 @@
-@"../swarm.exe" -fullscreen -w 1600 -h 900 -game portal
+@"../swarm.exe" -fullscreen -override_vpk -w 1600 -h 900 -game portal

@@ -1,1 +1,1 @@
-@"../swarm.exe" -sw -w 1280 -h 720 -allowdebug -dev -game portal
+@"../swarm.exe" -sw -w 1280 -h 720 -dev -override_vpk -allowdebug -game portal
