@@ -52,6 +52,7 @@ static vgui::HContext s_hVGuiContext = DEFAULT_VGUI_CONTEXT;
 
 ConVar cl_drawhud( "cl_drawhud", "1", FCVAR_CHEAT, "Enable the rendering of the hud" );
 ConVar hud_takesshots( "hud_takesshots", "0", FCVAR_CLIENTDLL | FCVAR_ARCHIVE, "Auto-save a scoreboard screenshot at the end of a map." );
+ConVar cl_use_v_viewmodel_fov("cl_use_v_viewmodel_fov", "0", FCVAR_CHEAT | FCVAR_ARCHIVE, "if set to true, we will use the v_viewmodel_fov convar instead of the weapon script.");
 
 extern ConVar v_viewmodel_fov;
 
@@ -800,7 +801,25 @@ void ClientModeShared::Layout( bool bForce /*= false*/)
 
 float ClientModeShared::GetViewModelFOV( void )
 {
-	return v_viewmodel_fov.GetFloat();
+	if (!cl_use_v_viewmodel_fov.GetBool())
+	{
+		float viewFov = 54.0;
+
+		//CBaseCombatWeapon *pWeapon = (CBaseCombatWeapon*)GetActiveWeapon();
+		C_BasePlayer *pPlayer = C_BasePlayer::GetLocalPlayer();
+		C_BaseCombatWeapon *pWeapon = pPlayer ? pPlayer->GetActiveWeapon() : NULL;;
+		if (pWeapon)
+		{
+			viewFov = pWeapon->GetWeaponFOV();
+		}
+
+		//
+		return viewFov;
+	}
+	else
+	{
+		return v_viewmodel_fov.GetFloat();
+	}
 }
 
 vgui::Panel *ClientModeShared::GetPanelFromViewport( const char *pchNamePath )

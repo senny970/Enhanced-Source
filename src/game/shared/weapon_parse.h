@@ -129,6 +129,9 @@ public:
 // TF2 specific
 	bool					bShowUsageHint;							// if true, then when you receive the weapon, show a hint about it
 
+// SDK
+	float m_flWeaponFOV;		//Tony; added weapon fov, SDK uses models from a couple different games, so FOV is different.
+
 // SERVER DLL
 
 };

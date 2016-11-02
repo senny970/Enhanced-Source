@@ -1099,6 +1099,8 @@ BEGIN_DATADESC( CFuncTrackTrain )
 	DEFINE_FIELD( m_controlMaxs, FIELD_VECTOR ),
 	DEFINE_FIELD( m_flVolume, FIELD_FLOAT ),
 	DEFINE_FIELD( m_oldSpeed, FIELD_FLOAT ),
+	DEFINE_FIELD( m_strPathTarget, FIELD_STRING),
+
 	//DEFINE_FIELD( m_lastBlockPos, FIELD_POSITION_VECTOR ), // temp values for blocking, don't save
 	//DEFINE_FIELD( m_lastBlockTick, FIELD_INTEGER ),
 
@@ -1109,20 +1111,21 @@ BEGIN_DATADESC( CFuncTrackTrain )
 	DEFINE_KEYFIELD( m_flDecelSpeed, FIELD_FLOAT, "ManualDecelSpeed" ),
 
 	// Inputs
-	DEFINE_INPUTFUNC( FIELD_VOID, "Stop", InputStop ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "StartForward", InputStartForward ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "StartBackward", InputStartBackward ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "Toggle", InputToggle ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "Resume", InputResume ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "Reverse", InputReverse ),
-	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeed", InputSetSpeed ),
-	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedDir", InputSetSpeedDir ),
-	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedReal", InputSetSpeedReal ),
-	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetSpeedDirAccel", InputSetSpeedDirAccel ),
-	DEFINE_INPUTFUNC( FIELD_STRING, "TeleportToPathNode", InputTeleportToPathNode ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "LockOrientation", InputLockOrientation ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "UnlockOrientation", InputUnlockOrientation ),
-	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetMaxSpeed", InputSetMaxSpeed ),
+	DEFINE_INPUTFUNC(FIELD_VOID, "Stop", InputStop),
+	DEFINE_INPUTFUNC(FIELD_VOID, "StartForward", InputStartForward),
+	DEFINE_INPUTFUNC(FIELD_VOID, "StartBackward", InputStartBackward),
+	DEFINE_INPUTFUNC(FIELD_VOID, "Toggle", InputToggle),
+	DEFINE_INPUTFUNC(FIELD_VOID, "Resume", InputResume),
+	DEFINE_INPUTFUNC(FIELD_VOID, "Reverse", InputReverse),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetSpeed", InputSetSpeed),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetSpeedDir", InputSetSpeedDir),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetSpeedReal", InputSetSpeedReal),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetMaxSpeed", InputSetMaxSpeed),
+	DEFINE_INPUTFUNC(FIELD_FLOAT, "SetSpeedDirAccel", InputSetSpeedDirAccel),
+	DEFINE_INPUTFUNC(FIELD_STRING, "MoveToPathNode", InputMoveToPathNode),
+	DEFINE_INPUTFUNC(FIELD_STRING, "TeleportToPathNode", InputTeleportToPathNode),
+	DEFINE_INPUTFUNC(FIELD_VOID, "LockOrientation", InputLockOrientation),
+	DEFINE_INPUTFUNC(FIELD_VOID, "UnlockOrientation", InputUnlockOrientation),
 
 	// Outputs
 	DEFINE_OUTPUT( m_OnStart, "OnStart" ),
@@ -1415,6 +1418,91 @@ void CFuncTrackTrain::InputSetSpeedDirAccel( inputdata_t &inputdata )
 	newSpeed = fabs(newSpeed);
 	float flScale = clamp( newSpeed, 0, 1 );
 	SetSpeed( m_maxSpeed * flScale, true );
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Input handler that sets a target path node to move to.
+// Input  : String name of the destination node
+//-----------------------------------------------------------------------------
+void CFuncTrackTrain::InputMoveToPathNode(inputdata_t &inputdata)
+{
+	m_strPathTarget = MAKE_STRING(inputdata.value.String());
+
+	CBaseEntity *pEntity = gEntList.FindEntityByName(NULL, inputdata.value.StringID());
+	CPathTrack *pTrack, *pNext;
+	pTrack = m_ppath;
+
+	const int MAX_SEARCH_LENGTH = 1000;
+	int searchesLeft = MAX_SEARCH_LENGTH;
+
+	if (pTrack && pEntity)
+	{
+		float flDesiredSpeed = pTrack->m_flSpeed;
+		if (pTrack->m_flSpeed == 0)
+		{
+			flDesiredSpeed = m_maxSpeed;
+		}
+
+		// if our current path is what we want then we can short circut. Still move forward - we will stop when we pass the track.
+		if (pEntity == pTrack)
+		{
+			if (IsDirForward())
+			{
+				if (pTrack->GetNext())
+				{
+					SetDirForward(false);
+					SetSpeed(flDesiredSpeed);
+					return;
+				}
+			}
+			else
+			{
+				if (pTrack->GetPrevious())
+				{
+					SetDirForward(true);
+					SetSpeed(flDesiredSpeed);
+					return;
+				}
+			}
+
+			Stop();
+			return;
+		}
+
+		do // check forward first
+		{
+			searchesLeft--;
+			pNext = pTrack->GetNext();
+			if (pNext)
+				pTrack = pNext;
+		} while (pNext && pEntity != pNext && searchesLeft); // quit if the next node is invalid - or our target
+
+		if (pNext == pEntity)
+		{
+			SetDirForward(true);
+			SetSpeed(flDesiredSpeed);
+			return;
+		}
+
+		searchesLeft = MAX_SEARCH_LENGTH;
+		pTrack = m_ppath;
+
+		// now reverse
+		do
+		{
+			searchesLeft--;
+			pNext = pTrack->GetPrevious();
+			if (pNext)
+				pTrack = pNext;
+		} while (pNext && pEntity != pNext && searchesLeft); // quit if the next node is invalid - or our target
+
+		if (pNext == pEntity)
+		{
+			SetDirForward(false);
+			SetSpeed(flDesiredSpeed);
+			return;
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

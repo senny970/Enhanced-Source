@@ -394,7 +394,7 @@ protected:
 
 public:
 	const PS_InternalData_t &m_DataAccess;
-
+	inline const PS_InternalData_t &GetInternalData() const;
 	friend class CPS_AutoGameSys_EntityListener;
 };
 
@@ -474,7 +474,10 @@ inline CPortalSimulator	*CPortalSimulator::GetLinkedPortalSimulator( void ) cons
 	return m_pLinkedPortal;
 }
 
-
+inline const PS_InternalData_t &CPortalSimulator::GetInternalData() const
+{
+	return m_InternalData;
+}
 
 
 #endif //#ifndef PORTALSIMULATION_H

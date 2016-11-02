@@ -45,6 +45,8 @@ public:
 	void Spawn( void );
 	void Touch( CBaseEntity *pOther );
 
+	bool m_bVisible;
+	
 	DECLARE_DATADESC();
 
 	// Outputs
@@ -54,6 +56,8 @@ public:
 };
 
 BEGIN_DATADESC( CTriggerPortalCleanser )
+
+DEFINE_KEYFIELD(m_bVisible, FIELD_BOOLEAN, "Visible"),
 
 // Outputs
 DEFINE_OUTPUT( m_OnDissolve, "OnDissolve" ),
@@ -73,6 +77,11 @@ void CTriggerPortalCleanser::Spawn( void )
 {	
 	BaseClass::Spawn();
 	InitTrigger();
+
+	if (m_bVisible)
+	{
+		RemoveEffects(EF_NODRAW);
+	}
 }
 
 // Creates a base entity with model/physics matching the parameter ent.
@@ -168,7 +177,16 @@ void CTriggerPortalCleanser::Touch( CBaseEntity *pOther )
 
 				if ( bFizzledPortal )
 				{
-					pPortalgun->SendWeaponAnim( ACT_VM_FIZZLE );
+#ifdef BLUEPORTALS
+					// Don't change the animation if the player is holding something through a fizzler.
+					// This needs to be added in for the anti-fizzle cube in BP. ~reep.
+					CBaseEntity *pHeldObject = GetPlayerHeldEntity(pPlayer);
+					if (!pHeldObject) {
+						pPortalgun->SendWeaponAnim(ACT_VM_FIZZLE);
+					}
+#else
+					pPortalgun->SendWeaponAnim(ACT_VM_FIZZLE);
+#endif
 					pPortalgun->SetLastFiredPortal( 0 );
 					m_OnFizzle.FireOutput( pOther, this );
 					pPlayer->RumbleEffect( RUMBLE_RPG_MISSILE, 0, RUMBLE_FLAG_RESTART );

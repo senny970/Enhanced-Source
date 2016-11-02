@@ -2308,5 +2308,8 @@ const CUtlVector<CProp_Portal *> *CProp_Portal::GetPortalLinkageGroup( unsigned 
 	return &s_PortalLinkageGroups[iLinkageGroupID];
 }
 
-
+bool CProp_Portal::IsFloorPortal(float fThreshold) const
+{
+	return m_PortalSimulator.GetInternalData().Placement.vForward.z > fThreshold;
+}
 

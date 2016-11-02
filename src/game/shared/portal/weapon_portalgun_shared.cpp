@@ -73,7 +73,7 @@ void CWeaponPortalgun::Precache()
 	PrecacheScriptSound( "Portal.fizzle_moved" );
 	PrecacheScriptSound( "Portal.fizzle_invalid_surface" );
 	PrecacheScriptSound( "Weapon_Portalgun.powerup" );
-	PrecacheScriptSound( "Weapon_PhysCannon.HoldSound" );
+	PrecacheScriptSound( "Weapon_Portalgun.HoldSound" );
 
 	PrecacheEffect("PortalBlast");
 
