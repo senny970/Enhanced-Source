@@ -85,9 +85,6 @@ extern ConVar	sv_alternateticks;
 
 // Portal-only con commands
 
-// We're not shipping any other P1 models besides what's needed.
-// If you have these models, re-enable these functions. ~reep
-#if 0
 #ifndef CLIENT_DLL
 // Create the box used for portal puzzles, named 'box'. Used for easy debugging of portal puzzles.
 void CC_Create_PortalWeightBox( void )
@@ -170,7 +167,6 @@ void CC_Create_PortalMetalSphere( void )
 }
 static ConCommand ent_create_portal_metal_sphere("ent_create_portal_metal_sphere", CC_Create_PortalMetalSphere, "Creates a reflective metal sphere where the player is looking.", FCVAR_GAMEDLL | FCVAR_CHEAT);
 #endif // CLIENT_DLL
-#endif //0
 
 #ifdef CLIENT_DLL //{
 
