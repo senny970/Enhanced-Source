@@ -404,10 +404,6 @@ public:
 	// Specific interactions
 	void	HandleAnyCollisionInteractions( int index, gamevcollisionevent_t *pEvent );
 
-#ifdef PORTAL
-	bool		m_bAllowPortalFunnel;
-#endif // PORTAL
-
 private:
 	// Compute impulse to apply to the enabled entity.
 	void ComputeEnablingImpulse( int index, gamevcollisionevent_t *pEvent );
