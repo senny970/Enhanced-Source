@@ -14,8 +14,8 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	".\hl2;.\hl2\elements;$SRCDIR\game\shared\hl2;$BASE"
-		$PreprocessorDefinitions		"$BASE;HL2_CLIENT_DLL"
+		$AdditionalIncludeDirectories	".\hl2;.\hl2\elements;$SRCDIR\game\shared\hl2;$SRCDIR\game\client\hl2\gameui;$SRCDIR\game\client\hl2\vgui;$SRCDIR\game\client\gameui;$BASE"
+		$PreprocessorDefinitions		"$BASE;SWARM_DLL;HL2_CLIENT_DLL;GAMEUI_EMBEDDED;GAMEUI_EXPORTS"
 	}
 }
 
@@ -24,9 +24,26 @@ $Project "Client (HL2)"
 	$Folder	"Source Files"
 	{
 		$File	"hud_chat.cpp"
+		$File	"$SRCDIR\game\shared\weapon_parse_default.cpp"
 		$File	"c_team_objectiveresource.cpp"
 		$File	"c_team_objectiveresource.h"
 
+		$Folder	"Multiplayer"
+		{
+			$File	"multiplayer\basenetworkedplayer_cl.h"
+			$File	"multiplayer\basenetworkedplayer_cl.cpp"
+			$File	"multiplayer\basenetworkedragdoll_cl.h"
+			$File	"multiplayer\basenetworkedragdoll_cl.cpp"
+			
+			$File	"$SRCDIR\game\shared\predicted_viewmodel.cpp"
+			$File	"$SRCDIR\game\shared\multiplayer\basenetworkedplayer_gamemove.h"
+			$File	"$SRCDIR\game\shared\multiplayer\basenetworkedplayer_gamemove.cpp"
+			$File	"$SRCDIR\game\shared\multiplayer\basenetworkedplayer_shared.h"
+			$File	"$SRCDIR\game\shared\multiplayer\basenetworkedplayer_shared.cpp"
+			$File	"$SRCDIR\game\shared\multiplayer\multiplayer_animstate.h"
+			$File	"$SRCDIR\game\shared\multiplayer\multiplayer_animstate.cpp"
+		}
+		
 		$Folder	"HL2 DLL"
 		{
 			$Folder	"VGUI"
@@ -104,6 +121,7 @@ $Project "Client (HL2)"
 		
 			$File	"$SRCDIR\game\shared\hl2\basehlcombatweapon_shared.cpp"
 			$File	"$SRCDIR\game\shared\hl2\achievements_hl2.cpp"
+			$File	"hl2\c_hl2_lesson.cpp"
 			$File	"hl2\c_antlion_dust.cpp"
 			$File	"hl2\c_ar2_explosion.cpp"
 			$File	"hl2\c_barnacle.cpp"
@@ -157,7 +175,7 @@ $Project "Client (HL2)"
 			$File	"hl2\fx_bugbait.cpp"
 			$File	"hl2\fx_hl2_impacts.cpp"
 			$File	"hl2\fx_hl2_tracers.cpp"
-			$File	"hl2\hl2_clientmode.cpp"
+			//$File	"hl2\hl2_clientmode.cpp"
 			$File	"$SRCDIR\game\shared\hl2\hl2_gamerules.cpp"
 			$File	"$SRCDIR\game\shared\hl2\hl2_gamerules.h"
 			$File	"$SRCDIR\game\shared\hl2\hl2_shareddefs.h"
@@ -182,8 +200,14 @@ $Project "Client (HL2)"
 			$File	"hl2\hud_weaponselection.cpp"
 			$File	"hl2\hud_zoom.cpp"
 			$File	"hl2\shieldproxy.cpp"
-			$File	"hl2\vgui_rootpanel_hl2.cpp"
+			//$File	"hl2\vgui_rootpanel_hl2.cpp"
 			$File 	"episodic\c_vort_charge_token.cpp"
 		}
+	}
+	
+	$Folder	"Link Libraries"
+	{
+		$Lib "$LIBCOMMON\jpeglib"
+		$Lib "$LIBPUBLIC\vpklib"
 	}
 }

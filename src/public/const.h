@@ -251,7 +251,8 @@ enum
 	EF_PARENT_ANIMATES		= 0x200,	// always assume that the parent entity is animating
 	EF_NOSHADOWDEPTH		= 0x300,	// Receive projected shadows, but don't cast them
 	EF_NOFLASHLIGHT			= 0x400,	// Cast projected shadows, but don't receive them
-	EF_MAX_BITS = 12
+	EF_SHADOWDEPTH_NOCACHE  = 0x800,
+	EF_MAX_BITS = 13
 };
 
 #define EF_PARITY_BITS	3

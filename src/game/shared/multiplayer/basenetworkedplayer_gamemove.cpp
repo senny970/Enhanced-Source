@@ -1,7 +1,7 @@
 #include "cbase.h"
 #include "multiplayer/basenetworkedplayer_gamemove.h"
 
-#ifndef PORTAL
+#if !defined(PORTAL) && !defined(HL2_DLL) && !defined(HL2_CLIENT_DLL)
 static CNetworkedPlayerMovement g_GameMovement;
 IGameMovement* g_pGameMovement = (IGameMovement*)&g_GameMovement;
 
