@@ -2,12 +2,14 @@ $Project "client"
 {
 	"game\client\client_template.vpc"	[$TEMPLATE]
 	"game\client\client_portal.vpc"		[$PORTAL]
+	"game\client\client_hl2.vpc"		[$HL2]
 }
 
 $Project "server"
 {
 	"game\server\server_template.vpc"	[$TEMPLATE]
 	"game\server\server_portal.vpc"		[$PORTAL]
+	"game\server\server_hl2.vpc"		[$HL2]
 }
 
 
