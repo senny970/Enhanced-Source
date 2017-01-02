@@ -24,6 +24,8 @@
 
 #include "basecombatweapon_shared.h"
 
+#define WEAPON_MAX 32 
+
 class CScriptedTarget;
 typedef CHandle<CBaseCombatWeapon> CBaseCombatWeaponHandle;
 struct fogparams_t;

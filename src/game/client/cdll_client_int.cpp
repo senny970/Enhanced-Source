@@ -1767,6 +1767,8 @@ void ConfigureCurrentSystemLevel()
 	char szModName[32] = "swarm";
 #elif defined ( HL2_EPISODIC )
 	char szModName[32] = "ep2";
+#elif defined ( HL2 )
+	char szModName[32] = "hl2";
 #elif defined ( SDK_CLIENT_DLL )
 	char szModName[32] = "sdk";
 #endif
