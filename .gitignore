@@ -32,3 +32,4 @@ ipch
 
 game/hl2
 
+src/game/client/Release_hl2/client.dll
