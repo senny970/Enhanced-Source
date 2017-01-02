@@ -26,8 +26,12 @@ void TE_PlayerAnimEvent( CBasePlayer* pPlayer, PlayerAnimEvent_t event, int nDat
 
 //* *************** CBaseNetworkedPlayer *******************
 
+#ifndef HL2_CLIENT_DLL
+#ifndef HL2_DLL
 #ifndef PORTAL
 LINK_ENTITY_TO_CLASS( player, CBaseNetworkedPlayer );
+#endif
+#endif
 #endif
 
 extern void SendProxy_Origin( const SendProp* pProp, const void* pStruct, const void* pData, DVariant* pOut, int iElement, int objectID );
