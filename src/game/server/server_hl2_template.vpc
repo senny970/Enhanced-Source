@@ -1,0 +1,10 @@
+//-----------------------------------------------------------------------------
+//	SERVER_HL2_TEMPLATE.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR		"..\.."
+$Macro GAMENAME 	"hl2_template"
+
+$Include "$SRCDIR\game\server\server_hl2_base.vpc"

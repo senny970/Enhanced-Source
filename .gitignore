@@ -31,5 +31,9 @@ ipch
 *.tmp
 
 game/hl2
+game/portal
 
-src/game/client/Release_hl2/client.dll
+src/game/client/Release*
+src/game/client/Debug*
+src/game/server/Debug*
+src/game/server/Release*
