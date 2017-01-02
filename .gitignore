@@ -30,6 +30,9 @@ ipch
 # shader files
 *.tmp
 
+hammer.vdf
+GameConfig.txt
+
 game/hl2
 game/portal
 
