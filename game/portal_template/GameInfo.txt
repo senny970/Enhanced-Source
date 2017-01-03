@@ -40,7 +40,7 @@
 			Game				|gameinfo_path|.
 
 			// Like the Source 2006 base, you need to include this folder as it has ALL of the content that is mostly shared.
-			Game				sourcetest
+			Game				core
 
 			// The platform folder, has the stuff to make the engine run.
 			Game				platform
