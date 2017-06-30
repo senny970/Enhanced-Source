@@ -1,5 +1,6 @@
 $Project "client"
 {
+	"game\client\client_deferred.vpc"	[$DEFERRED]
 	"game\client\client_template.vpc"	[$TEMPLATE]
 	"game\client\client_portal.vpc"		[$PORTAL]
 	"game\client\client_portal_template.vpc"		[$PORTAL_TEMPLATE]
@@ -9,6 +10,7 @@ $Project "client"
 
 $Project "server"
 {
+	"game\server\server_deferred.vpc"	[$DEFERRED]
 	"game\server\server_template.vpc"	[$TEMPLATE]
 	"game\server\server_portal_template.vpc"		[$PORTAL_TEMPLATE]
 	"game\server\server_portal.vpc"		[$PORTAL]
@@ -30,4 +32,5 @@ $Project "shaderlib"
 $Project "game_shader"
 {
 	"materialsystem\stdshaders\game_shader_dx9_portal.vpc"	[$PORTAL]
+	"materialsystem\deferredshaders\game_shader_generic_deferred.vpc"	[$DEFERRED]
 }

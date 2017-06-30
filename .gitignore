@@ -1,6 +1,7 @@
 # Files to ignore when considering what GIT should commit.
 
-# Visual Studio 
+# Visual Studio
+source-shader-editor
 *.suo
 *.user
 *.sln.docstates
@@ -43,3 +44,9 @@ src/game/server/Debug*
 src/game/server/Release*
 
 
+src/.vs/Game_Deferred-2013/v15/Browse.VC.opendb
+src/materialsystem/deferredshaders/Release_dx9_deferred/game_shader_generic_deferred.lib
+src/materialsystem/deferredshaders/Release_dx9_deferred/game_shader_generic_deferred.dll
+src/materialsystem/deferredshaders/Debug_dx9_deferred/game_shader_generic_deferred.lib
+src/.vs/Game_Deferred-2013/v15/Solution.VC.db-wal
+src/.vs/Game_Deferred-2013/v15/Solution.VC.db-shm

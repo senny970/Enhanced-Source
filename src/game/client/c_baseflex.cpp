@@ -202,6 +202,7 @@ IClientModelRenderable*	C_BaseFlex::GetClientModelRenderable()
 	if ( !BaseClass::GetClientModelRenderable() )
 		return NULL;
 
+	MDLCACHE_CRITICAL_SECTION();
 	// No flexes allowed for fast path atm
 	CStudioHdr *hdr = GetModelPtr();
 	if ( !hdr || ( hdr->numflexcontrollers() != 0 ) )
