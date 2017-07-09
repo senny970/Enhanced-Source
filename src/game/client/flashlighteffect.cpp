@@ -809,22 +809,19 @@ void CFlashlightEffectManager::TurnOnFlashlight(int nEntIndex, const char *pszTe
 		return;
 	}
 
-#ifdef DEFERRED
 	if (!m_pFlashlightEffect)
 	{
+		#ifdef DEFERRED
 		if (GetDeferredManager()->IsDeferredRenderingEnabled())
 			m_pFlashlightEffect = new CFlashlightEffectDeferred(m_nFlashlightEntIndex, pszTextureName, flFov, flFarZ, flLinearAtten);
 		else
+		#endif
 			m_pFlashlightEffect = new CFlashlightEffect(m_nFlashlightEntIndex, pszTextureName, flFov, flFarZ, flLinearAtten);
-#endif
 
 		if (!m_pFlashlightEffect)
 		{
 			return;
 		}
-#ifdef DEFERRED
 	}
-#endif
-
 	m_pFlashlightEffect->TurnOn();
 }
