@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright Â© 1996-2005, Valve Corporation, All rights reserved. ======//
 //
 // Purpose: 
 //
@@ -809,18 +809,22 @@ void CFlashlightEffectManager::TurnOnFlashlight(int nEntIndex, const char *pszTe
 		return;
 	}
 
+#ifdef DEFERRED
 	if (!m_pFlashlightEffect)
 	{
 		if (GetDeferredManager()->IsDeferredRenderingEnabled())
 			m_pFlashlightEffect = new CFlashlightEffectDeferred(m_nFlashlightEntIndex, pszTextureName, flFov, flFarZ, flLinearAtten);
 		else
 			m_pFlashlightEffect = new CFlashlightEffect(m_nFlashlightEntIndex, pszTextureName, flFov, flFarZ, flLinearAtten);
+#endif
 
 		if (!m_pFlashlightEffect)
 		{
 			return;
 		}
+#ifdef DEFERRED
 	}
+#endif
 
 	m_pFlashlightEffect->TurnOn();
 }
