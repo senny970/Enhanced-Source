@@ -182,9 +182,9 @@ public:
 	bool IsZooming( void );
 	void CheckSuitZoom( void );
 
-	virtual void				FlashlightTurnOn( void );
-	virtual void				FlashlightTurnOff( void );
-	virtual CBaseEntity	*CHL2_Player::GetHeldObject( void );
+	virtual bool				FlashlightTurnOn( bool );
+	virtual void				FlashlightTurnOff( bool );
+	virtual CBaseEntity*		GetHeldObject( void );
 
 	// Walking
 	void StartWalking( void );

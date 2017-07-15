@@ -2391,7 +2391,7 @@ bool CWeaponPhysCannon::AttachObject( CBaseEntity *pObject, const Vector &vPosit
 
 		if ( pProp && pProp->HasInteraction( PROPINTER_PHYSGUN_CREATE_FLARE ) )
 		{
-			pOwner->FlashlightTurnOff();
+			pOwner->FlashlightTurnOff(true);
 		}
 #endif
 

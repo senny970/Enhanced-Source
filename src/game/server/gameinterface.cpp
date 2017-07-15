@@ -1507,11 +1507,12 @@ void CServerGameDLL::CreateNetworkStringTables( void )
 			g_pStringTableMaterials &&
 			g_pStringTableInfoPanel &&
 			g_pStringTableClientSideChoreoScenes &&
-			g_pStringTableExtraParticleFiles 
-#ifdef DEFERRED
-			&& g_pStringTable_LightCookies
-#endif
+			g_pStringTableExtraParticleFiles
 	);
+
+#ifdef DEFERRED
+	Assert( g_pStringTable_LightCookies );
+#endif
 
 	// Need this so we have the error material always handy
 	PrecacheMaterial( "debug/debugempty" );

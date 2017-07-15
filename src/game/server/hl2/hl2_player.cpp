@@ -1821,7 +1821,7 @@ void CHL2_Player::SuitPower_Update( void )
 				if( FlashlightIsOn() )
 				{
 #ifndef HL2MP
-					FlashlightTurnOff();
+					FlashlightTurnOff( true );
 #endif
 				}
 			}
@@ -1833,7 +1833,7 @@ void CHL2_Player::SuitPower_Update( void )
 			if( m_HL2Local.m_flSuitPower < 4.8f && FlashlightIsOn() )
 			{
 #ifndef HL2MP
-				FlashlightTurnOff();
+				FlashlightTurnOff( true );
 #endif
 			}
 		}
@@ -2017,33 +2017,35 @@ int CHL2_Player::FlashlightIsOn( void )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void CHL2_Player::FlashlightTurnOn( void )
+bool CHL2_Player::FlashlightTurnOn( bool sound )
 {
 	if( m_bFlashlightDisabled )
-		return;
+		return false;
 
 	if ( Flashlight_UseLegacyVersion() )
 	{
 		if( !SuitPower_AddDevice( SuitDeviceFlashlight ) )
-			return;
+			return false;
 	}
 #ifdef HL2_DLL
 	if( !IsSuitEquipped() )
-		return;
+		return false;
 #endif
 
 	AddEffects( EF_DIMLIGHT );
-	EmitSound( "HL2Player.FlashLightOn" );
+	if ( sound )
+		EmitSound( "HL2Player.FlashLightOn" );
 
 	variant_t flashlighton;
 	flashlighton.SetFloat( m_HL2Local.m_flSuitPower / 100.0f );
 	FirePlayerProxyOutput( "OnFlashlightOn", flashlighton, this, this );
+	return true;
 }
 
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void CHL2_Player::FlashlightTurnOff( void )
+void CHL2_Player::FlashlightTurnOff( bool sound )
 {
 	if ( Flashlight_UseLegacyVersion() )
 	{
@@ -2052,6 +2054,7 @@ void CHL2_Player::FlashlightTurnOff( void )
 	}
 
 	RemoveEffects( EF_DIMLIGHT );
+	if ( sound )
 	EmitSound( "HL2Player.FlashLightOff" );
 
 	variant_t flashlightoff;
@@ -2189,7 +2192,7 @@ void CHL2_Player::SetFlashlightEnabled( bool bState )
 void CHL2_Player::InputDisableFlashlight( inputdata_t &inputdata )
 {
 	if( FlashlightIsOn() )
-		FlashlightTurnOff();
+		FlashlightTurnOff( false );
 
 	SetFlashlightEnabled( false );
 }
@@ -3251,7 +3254,7 @@ void CHL2_Player::UpdateClientData( void )
 			m_HL2Local.m_flFlashBattery -= FLASH_DRAIN_TIME * gpGlobals->frametime;
 			if ( m_HL2Local.m_flFlashBattery < 0.0f )
 			{
-				FlashlightTurnOff();
+				FlashlightTurnOff(true);
 				m_HL2Local.m_flFlashBattery = 0.0f;
 			}
 		}
