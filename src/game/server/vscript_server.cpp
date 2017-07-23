@@ -325,6 +325,9 @@ HSCRIPT CreateProp( const char *pszEntityName, const Vector &vOrigin, const char
 		pBaseEntity->SetSequence( iSequence );
 	}
 
+	DispatchSpawn( pBaseEntity );
+	pBaseEntity->Activate();
+
 	return ToHScript( pBaseEntity );
 }
 
