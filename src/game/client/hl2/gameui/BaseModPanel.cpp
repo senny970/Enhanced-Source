@@ -1764,10 +1764,10 @@ void CBaseModPanel::PaintBackground()
 		{
 			ActivateBackgroundEffects();
 
-			if ( ASWBackgroundMovie() )
+			if ( HL2BackgroundMovie() )
 			{
-				ASWBackgroundMovie()->Update();
-				if ( ASWBackgroundMovie()->SetTextureMaterial() != -1 )
+				HL2BackgroundMovie()->Update();
+				if ( HL2BackgroundMovie()->SetTextureMaterial() != -1 )
 				{
 					surface()->DrawSetColor( 255, 255, 255, 255 );
 					int x, y, w, h;

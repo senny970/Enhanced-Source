@@ -8,3 +8,7 @@ $Macro SRCDIR		"..\.."
 $Macro GAMENAME 	"hl2"
 
 $Include "$SRCDIR\game\client\client_hl2_base.vpc"
+
+$Project "Client (HL2)"
+{
+}

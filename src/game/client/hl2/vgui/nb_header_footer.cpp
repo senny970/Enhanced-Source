@@ -11,18 +11,18 @@
 
 using namespace vgui;
 
-CASW_Background_Movie *g_pBackgroundMovie = NULL;
+CHL2_Background_Movie *g_pBackgroundMovie = NULL;
 
-CASW_Background_Movie* ASWBackgroundMovie()
+CHL2_Background_Movie* HL2BackgroundMovie()
 {
 	if ( !g_pBackgroundMovie )
 	{
-		g_pBackgroundMovie = new CASW_Background_Movie();
+		g_pBackgroundMovie = new CHL2_Background_Movie();
 	}
 	return g_pBackgroundMovie;
 }
 
-CASW_Background_Movie::CASW_Background_Movie()
+CHL2_Background_Movie::CHL2_Background_Movie()
 {
 #ifdef ASW_BINK_MOVIES
 	m_nBIKMaterial = BIKMATERIAL_INVALID;
@@ -34,12 +34,12 @@ CASW_Background_Movie::CASW_Background_Movie()
 	m_nLastGameState = -1;
 }
 
-CASW_Background_Movie::~CASW_Background_Movie()
+CHL2_Background_Movie::~CHL2_Background_Movie()
 {
 
 }
 
-void CASW_Background_Movie::SetCurrentMovie( const char *szFilename )
+void CHL2_Background_Movie::SetCurrentMovie( const char *szFilename )
 {
 	if ( Q_strcmp( m_szCurrentMovie, szFilename ) )
 	{
@@ -78,7 +78,7 @@ void CASW_Background_Movie::SetCurrentMovie( const char *szFilename )
 	}
 }
 
-void CASW_Background_Movie::ClearCurrentMovie()
+void CHL2_Background_Movie::ClearCurrentMovie()
 {
 #ifdef ASW_BINK_MOVIES
 	if ( m_nBIKMaterial != BIKMATERIAL_INVALID )
@@ -99,7 +99,7 @@ void CASW_Background_Movie::ClearCurrentMovie()
 #endif
 }
 
-int CASW_Background_Movie::SetTextureMaterial()
+int CHL2_Background_Movie::SetTextureMaterial()
 {
 #ifdef ASW_BINK_MOVIES
 	if ( m_nBIKMaterial == BIKMATERIAL_INVALID )
@@ -122,9 +122,9 @@ int CASW_Background_Movie::SetTextureMaterial()
 	return m_nTextureID;
 }
 
-void CASW_Background_Movie::Update()
+void CHL2_Background_Movie::Update()
 {
-//	if ( engine->IsConnected() && ASWGameRules() )
+//	if ( engine->IsConnected() && HL2GameRules() )
 	int nGameState = 0;
 	if ( nGameState != m_nLastGameState )
 	{
@@ -211,8 +211,8 @@ CNB_Header_Footer::~CNB_Header_Footer()
 
 }
 
-extern ConVar asw_force_background_movie;
-ConVar asw_background_color( "sdk_background_color", "16 32 46 128", FCVAR_NONE, "Color of background tinting in briefing screens" );
+extern ConVar HL2_force_background_movie;
+ConVar HL2_background_color( "sdk_background_color", "16 32 46 128", FCVAR_NONE, "Color of background tinting in briefing screens" );
 
 void CNB_Header_Footer::ApplySchemeSettings( vgui::IScheme *pScheme )
 {
@@ -243,7 +243,7 @@ void CNB_Header_Footer::ApplySchemeSettings( vgui::IScheme *pScheme )
 			{
 				m_pBackground->SetVisible( true );
 				m_pBackgroundImage->SetVisible( false );
-				m_pBackground->SetBgColor( asw_background_color.GetColor() );
+				m_pBackground->SetBgColor( HL2_background_color.GetColor() );
 				break;
 			}
 		case NB_BACKGROUND_TRANSPARENT_RED:
@@ -352,10 +352,10 @@ void CNB_Header_Footer::PaintBackground()
 {
 	BaseClass::PaintBackground();
 
-	if ( m_bMovieEnabled && ASWBackgroundMovie() )
+	if ( m_bMovieEnabled && HL2BackgroundMovie() )
 	{
-		ASWBackgroundMovie()->Update();
-		if ( ASWBackgroundMovie()->SetTextureMaterial() != -1 )
+		HL2BackgroundMovie()->Update();
+		if ( HL2BackgroundMovie()->SetTextureMaterial() != -1 )
 		{
 			surface()->DrawSetColor( 255, 255, 255, 255 );
 
