@@ -15,7 +15,7 @@ $Configuration
 	}
 }
 
-$Project "Server (HL2)"
+$Project
 {
 	$Folder	"Source Files"
 	{
@@ -153,7 +153,6 @@ $Project "Server (HL2)"
 			$File	"hl2\monster_dummy.cpp"
 			$File	"hl2\npc_alyx.cpp"
 			$File	"hl2\npc_alyx.h"
-			$File	"hl2\npc_alyx_episodic.h"
 			$File	"hl2\npc_antlion.cpp"
 			$File	"hl2\npc_antlion.h"
 			$File	"hl2\npc_antlionguard.cpp"

@@ -6,6 +6,7 @@ $Games
 	"PORTAL_TEMPLATE"
 	"HL2"
 	"HL2_TEMPLATE"
+	"HL2_EPISODIC"
 }
 
 $Conditional	"SOURCESDK" "1"
