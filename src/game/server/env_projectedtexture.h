@@ -40,6 +40,7 @@ public:
 	void InputSetAmbient( inputdata_t &inputdata );
 	void InputSetNearZ( inputdata_t &inputdata );
 	void InputSetFarZ( inputdata_t &inputdata );
+	void InputSetBrightnessScale( inputdata_t &inputdata );
 
 	void InitialThink( void );
 

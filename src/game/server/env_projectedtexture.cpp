@@ -48,6 +48,7 @@ BEGIN_DATADESC( CEnvProjectedTexture )
 	DEFINE_INPUTFUNC( FIELD_COLOR32, "LightColor", InputSetLightColor ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "Ambient", InputSetAmbient ),
 	DEFINE_INPUTFUNC( FIELD_STRING, "SpotlightTexture", InputSetSpotlightTexture ),
+	DEFINE_INPUTFUNC( FIELD_FLOAT, "BrightnessScale", InputSetBrightnessScale ),
 	DEFINE_INPUTFUNC (FIELD_FLOAT, "SetNearZ", InputSetNearZ ),
 	DEFINE_INPUTFUNC( FIELD_FLOAT, "SetFarZ", InputSetFarZ ),
 	DEFINE_THINKFUNC( InitialThink ),
@@ -243,6 +244,11 @@ void CEnvProjectedTexture::InputSetNearZ(inputdata_t &inputdata)
 void CEnvProjectedTexture::InputSetFarZ(inputdata_t &inputdata)
 {
 	m_flFarZ = inputdata.value.Float();
+}
+
+void CEnvProjectedTexture::InputSetBrightnessScale(inputdata_t &inputdata)
+{
+	m_flBrightnessScale = inputdata.value.Float();
 }
 
 void CEnvProjectedTexture::Activate( void )

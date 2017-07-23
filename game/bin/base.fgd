@@ -6647,6 +6647,8 @@
 
 	input SetNearZ(float) : "Sets the near Z distance."
 	input SetFarZ(float) : "Sets the far Z distance."
+	
+	input SetBrightnessScale(float) : "Sets brightness scale."
 ]
 
 
