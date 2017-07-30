@@ -4565,7 +4565,7 @@ void CAI_BaseNPC::Sleep()
 
 	if( GetState() == NPC_STATE_SCRIPT )
 	{
-		Warning( "%s put to sleep while in Scripted state!\n", GetClassName() );
+		Warning( "%s put to sleep while in Scripted state!\n", GetClassname() );
 	}
 
 	VacateStrategySlot();
