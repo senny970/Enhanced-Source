@@ -2497,7 +2497,7 @@ void CAI_ActBusyGoal::InputForceNPCToActBusy( inputdata_t &inputdata )
 			pHintNode = dynamic_cast<CAI_Hint*>(pEntity);
 			if ( !pHintNode )
 			{
-				Msg("ai_goal_actbusy input ForceNPCToActBusy fired targeting an entity that isn't a hintnode.\n", pszParam);
+				Msg("ai_goal_actbusy input ForceNPCToActBusy fired targeting an entity that isn't a hintnode.\n");
 				return;
 			}
 

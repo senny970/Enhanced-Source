@@ -163,7 +163,7 @@ DEFINE_INPUTFUNC( FIELD_VOID,	"LookOn",	InputLookOn ),
 DEFINE_INPUTFUNC( FIELD_VOID,	"StartPatrolling",	InputStartPatrolling ),
 DEFINE_INPUTFUNC( FIELD_VOID,	"StopPatrolling",	InputStopPatrolling ),
 
-//DEFINE_INPUTFUNC( FIELD_STRING,	"Assault", InputAssault ),
+DEFINE_INPUTFUNC( FIELD_STRING,	"Assault", InputAssault ),
 
 DEFINE_INPUTFUNC( FIELD_VOID,	"HitByBugbait",		InputHitByBugbait ),
 
@@ -232,15 +232,15 @@ void CNPC_Combine::InputStopPatrolling( inputdata_t &inputdata )
 {
 	m_bShouldPatrol = false;
 }
-/*
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
 void CNPC_Combine::InputAssault( inputdata_t &inputdata )
 {
-	m_AssaultBehavior.SetParameters( AllocPooledString(inputdata.value.String()), CUE_DONT_WAIT, RALLY_POINT_SELECT_DEFAULT );
+	m_AssaultBehavior.SetParameters( AllocPooledString(inputdata.value.String()), CUE_DONT_WAIT, RALLY_POINT_SELECT_CLOSEST );
 }
-*/
+
 //-----------------------------------------------------------------------------
 // We were hit by bugbait
 //-----------------------------------------------------------------------------
