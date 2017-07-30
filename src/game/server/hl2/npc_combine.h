@@ -73,7 +73,7 @@ public:
 	void InputLookOff( inputdata_t &inputdata );
 	void InputStartPatrolling( inputdata_t &inputdata );
 	void InputStopPatrolling( inputdata_t &inputdata );
-//	void InputAssault( inputdata_t &inputdata );
+	void InputAssault( inputdata_t &inputdata );
 	void InputHitByBugbait( inputdata_t &inputdata );
 	void InputThrowGrenadeAtTarget( inputdata_t &inputdata );
 	void InputThrowTeleportGrenadeAtTarget( inputdata_t &inputdata );
