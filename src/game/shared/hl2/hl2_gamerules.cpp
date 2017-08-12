@@ -11,7 +11,7 @@
 #include "hl2_shareddefs.h"
 
 #ifdef CLIENT_DLL
-
+	#include "filesystem.h"
 #else
 	#include "player.h"
 	#include "game.h"
@@ -1821,7 +1821,7 @@ bool CHalfLife2::ShouldBurningPropsEmitLight()
 // convert a velocity in ft/sec and a mass in grains to an impulse in kg in/s
 #define BULLET_IMPULSE(grains, ftpersec)	((ftpersec)*12*BULLET_MASS_GRAINS_TO_KG(grains)*BULLET_IMPULSE_EXAGGERATION)
 
-
+static bool* sHack = NULL;
 CAmmoDef *GetAmmoDef()
 {
 	static CAmmoDef def;
@@ -1830,6 +1830,7 @@ CAmmoDef *GetAmmoDef()
 	if ( !bInitted )
 	{
 		bInitted = true;
+		sHack = &bInitted;
 
 		def.AddAmmoType("AR2",				DMG_BULLET,					TRACER_LINE_AND_WHIZ,	"sk_plr_dmg_ar2",			"sk_npc_dmg_ar2",			"sk_max_ar2",			BULLET_IMPULSE(200, 1225), 0 );
 		def.AddAmmoType("AlyxGun",			DMG_BULLET,					TRACER_LINE,			"sk_plr_dmg_alyxgun",		"sk_npc_dmg_alyxgun",		"sk_max_alyxgun",		BULLET_IMPULSE(200, 1225), 0 );
@@ -1904,10 +1905,50 @@ CAmmoDef *GetAmmoDef()
 		def.AddAmmoType("CombineHeavyCannon",	DMG_BULLET,				TRACER_LINE,			40,	40, NULL, 10 * 750 * 12, AMMO_FORCE_DROP_IF_CARRIED ); // hit like a 10 kg weight at 750 ft/s
 		def.AddAmmoType("ammo_proto1",			DMG_BULLET,				TRACER_LINE,			0, 0, 10, 0, 0 );
 #endif // HL2_EPISODIC
+
+		{
+			KeyValuesAD pCusAmmo( "CustomAmmo" );
+			if ( pCusAmmo->LoadFromFile( filesystem, "scripts/customammo.txt", "MOD" ) )
+			{
+				FOR_EACH_TRUE_SUBKEY( pCusAmmo, ammo )
+				{
+					const char* name = ammo->GetName();
+					int dmgBits = ammo->GetInt( "dmgType" );
+					int tracer = ammo->GetInt( "tracer" );
+					int plr = ammo->GetInt( "plrDmg" );
+					int npc = ammo->GetInt( "npcDmg" );
+					int max = ammo->GetInt( "maxAmmo" );
+					float impulse;
+					KeyValues *imp = ammo->FindKey( "BulletImpulse" );
+					if ( imp )
+						impulse = BULLET_IMPULSE( imp->GetFloat( "grains" ), imp->GetFloat( "ftps" ) );
+					else
+						impulse = ammo->GetFloat( "impulse" );
+					int flags = ammo->GetInt( "flags" );
+					int minSplash = ammo->GetInt( "minSplash", 4 );
+					int maxSplash = ammo->GetInt( "maxSplash", 8 );
+					def.AddAmmoType( name, dmgBits, tracer, plr, npc, max, impulse, flags, minSplash, maxSplash );
+				}
+			}
+		}
 	}
 
 	return &def;
 }
+
+CON_COMMAND_F_SHARED( test_invalidate_ammodeff, "", FCVAR_HIDDEN )
+{
+	if ( sHack )
+		*sHack = false;
+}
+
+#ifdef CLIENT_DLL
+CON_COMMAND( test_invalidate_ammodef, "Invalidates CAmmoDef database\n" )
+{
+	engine->ServerCmd( "test_invalidate_ammodeff_server" );
+	engine->ClientCmd_Unrestricted( "test_invalidate_ammodeff_client" );
+}
+#endif
 
 #endif
 #endif
