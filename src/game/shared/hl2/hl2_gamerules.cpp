@@ -1821,7 +1821,6 @@ bool CHalfLife2::ShouldBurningPropsEmitLight()
 // convert a velocity in ft/sec and a mass in grains to an impulse in kg in/s
 #define BULLET_IMPULSE(grains, ftpersec)	((ftpersec)*12*BULLET_MASS_GRAINS_TO_KG(grains)*BULLET_IMPULSE_EXAGGERATION)
 
-static bool* sHack = NULL;
 CAmmoDef *GetAmmoDef()
 {
 	static CAmmoDef def;
@@ -1830,7 +1829,6 @@ CAmmoDef *GetAmmoDef()
 	if ( !bInitted )
 	{
 		bInitted = true;
-		sHack = &bInitted;
 
 		def.AddAmmoType("AR2",				DMG_BULLET,					TRACER_LINE_AND_WHIZ,	"sk_plr_dmg_ar2",			"sk_npc_dmg_ar2",			"sk_max_ar2",			BULLET_IMPULSE(200, 1225), 0 );
 		def.AddAmmoType("AlyxGun",			DMG_BULLET,					TRACER_LINE,			"sk_plr_dmg_alyxgun",		"sk_npc_dmg_alyxgun",		"sk_max_alyxgun",		BULLET_IMPULSE(200, 1225), 0 );
@@ -1935,20 +1933,6 @@ CAmmoDef *GetAmmoDef()
 
 	return &def;
 }
-
-CON_COMMAND_F_SHARED( test_invalidate_ammodeff, "", FCVAR_HIDDEN )
-{
-	if ( sHack )
-		*sHack = false;
-}
-
-#ifdef CLIENT_DLL
-CON_COMMAND( test_invalidate_ammodef, "Invalidates CAmmoDef database\n" )
-{
-	engine->ServerCmd( "test_invalidate_ammodeff_server" );
-	engine->ClientCmd_Unrestricted( "test_invalidate_ammodeff_client" );
-}
-#endif
 
 #endif
 #endif
