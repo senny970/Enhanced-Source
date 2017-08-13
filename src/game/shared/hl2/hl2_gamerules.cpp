@@ -1821,7 +1821,6 @@ bool CHalfLife2::ShouldBurningPropsEmitLight()
 // convert a velocity in ft/sec and a mass in grains to an impulse in kg in/s
 #define BULLET_IMPULSE(grains, ftpersec)	((ftpersec)*12*BULLET_MASS_GRAINS_TO_KG(grains)*BULLET_IMPULSE_EXAGGERATION)
 
-
 CAmmoDef *GetAmmoDef()
 {
 	static CAmmoDef def;
