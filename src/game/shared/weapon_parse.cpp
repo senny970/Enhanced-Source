@@ -13,9 +13,9 @@
 #include <string>
 
 #ifndef CLIENT_DLL
-	#include "weapon_custom.h"
+	#include "smmod/weapon_custom.h"
 #else
-	#include "c_weapon_custom.h"
+	#include "smmod/c_weapon_custom.h"
 	#include "networkstringtabledefs.h"
 #endif
 

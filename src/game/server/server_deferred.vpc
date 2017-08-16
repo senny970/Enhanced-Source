@@ -24,6 +24,12 @@ $Project "Server (Deferred)"
 {
 	$Folder	"Source Files"
 	{
+		$Folder Smmod
+		{
+			$File	"$SRCDIR\game\shared\smmod\weapon_parse_custom_weapon.cpp"
+			$File	"smmod\weapon_custom.cpp"
+		}
+
 		$Folder "Template"
 		{
 			$File	"$SRCDIR\game\shared\template\my_shareddefs.h"
