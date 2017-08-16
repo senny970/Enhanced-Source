@@ -45,12 +45,6 @@ $Project
 		$File	"$SRCDIR\game\shared\vehicle_choreo_generic_shared.h"
 		$File	"$SRCDIR\game\shared\weapon_parse_default.cpp"
 
-		$Folder Smmod
-		{
-			$File	"$SRCDIR\game\shared\smmod\weapon_parse_custom_weapon.cpp"
-			$File	"smmod\weapon_custom.cpp"
-		}
-
 		$Folder	"Multiplayer"
 		{
 			$File	"multiplayer\basenetworkedplayer.h"

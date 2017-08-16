@@ -1,5 +1,5 @@
 #include "cbase.h"
-#include "smmod/weapon_parse_custom_weapon.h"
+#include "weapon_parse_custom_weapon.h"
 
 #include "tier0/memdbgon.h"
 
