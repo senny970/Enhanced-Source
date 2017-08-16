@@ -50,7 +50,7 @@ $Project
 			$File	"$SRCDIR\game\shared\smmod\weapon_parse_custom_weapon.cpp"
 			$File	"smmod\weapon_custom.cpp"
 		}
-		
+
 		$Folder	"Multiplayer"
 		{
 			$File	"multiplayer\basenetworkedplayer.h"
