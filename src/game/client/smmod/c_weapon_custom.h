@@ -3,11 +3,18 @@
 #ifdef _WIN32
 #pragma once
 #endif
-#include "hl2/c_basehlcombatweapon.h"
 
-class C_WeaponCustom : public C_HLSelectFireMachineGun
+#ifdef HL2_CLIENT_DLL
+#include "hl2/c_basehlcombatweapon.h"
+#define CUSTOM_WEAPON_BASE C_HLSelectFireMachineGun
+#else
+#include "sdk/weapons/c_basesdkcombatweapon.h"
+#define CUSTOM_WEAPON_BASE C_SDKSelectFireMachineGun
+#endif
+
+class C_WeaponCustom : public CUSTOM_WEAPON_BASE
 {
-	DECLARE_CLASS( C_WeaponCustom, C_HLSelectFireMachineGun );
+	DECLARE_CLASS( C_WeaponCustom, CUSTOM_WEAPON_BASE );
 public:
 	DECLARE_PREDICTABLE();
 	DECLARE_CLIENTCLASS();

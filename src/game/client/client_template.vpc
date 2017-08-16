@@ -22,6 +22,12 @@ $Project "Client (Template)"
 {
 	$Folder "Source Files"
 	{
+		$Folder Smmod
+		{
+			$File	"$SRCDIR\game\shared\smmod\weapon_parse_custom_weapon.cpp"
+			$File	"smmod\c_weapon_custom.cpp"
+		}
+		
 		$Folder	"Template"
 		{
 			$File	"$SRCDIR\game\shared\template\sdk_gamemovement.cpp"

@@ -2,14 +2,21 @@
 #define	WEAPONCUSTOM_H
 
 #include "weapon_parse_custom_weapon.h"
-#include "basehlcombatweapon.h"
 #include "weapon_rpg.h"
 
-class CWeaponCustom : public CHLSelectFireMachineGun
+#ifdef HL2
+#include "basehlcombatweapon.h"
+#define CUSTOM_WEAPON_BASE CHLSelectFireMachineGun
+#else
+#include "basesdkcombatweapon.h"
+#define CUSTOM_WEAPON_BASE CSDKSelectFireMachineGun
+#endif
+
+class CWeaponCustom : public CUSTOM_WEAPON_BASE
 {
 	DECLARE_DATADESC();
 public:
-	DECLARE_CLASS( CWeaponCustom, CHLSelectFireMachineGun );
+	DECLARE_CLASS( CWeaponCustom, CUSTOM_WEAPON_BASE );
 
 	CWeaponCustom();
 
@@ -136,9 +143,6 @@ public:
 		return static_cast< const CustomWeaponInfo& >( GetWpnData() );
 	}
 
-protected: //Why did I not put this in? I have no idea...
-		CHandle<CMissile>	m_hMissile;
-		CHandle<CMissile>	m_hMissile2;
 private:
 	void	CheckZoomToggle(void);
 	void	ToggleZoom(void);
@@ -146,6 +150,8 @@ private:
 private:
 	bool				m_bInZoom;
 	bool				bFlip;
+	CHandle<CMissile>	m_hMissile;
+	CHandle<CMissile>	m_hMissile2;
 
 	CNetworkVar( int, scopeNum );
 };

@@ -50,9 +50,12 @@ static IClientNetworkable* C_WeaponCustom_CreateObject( int entnum, int serialNu
 			cName = factories[i].cName;
 			break;
 		}
+	
+	if ( cName.empty() )
+		Warning("C_WeaponCustom_CreateObject did not recieve classname from server\n");
 
 	C_WeaponCustom *pRet = cName.empty() ? new C_WeaponCustom : new C_WeaponCustom( cName.c_str() );
-	if ( !pRet ) return 0;
+	if ( !pRet ) return NULL;
 	pRet->Init( entnum, serialNum );
 	return pRet;
 }
