@@ -592,7 +592,7 @@ private:
 	
 	// Server only
 #if !defined( CLIENT_DLL )
-
+protected:
 	// Outputs
 	COutputEvent			m_OnPlayerUse;		// Fired when the player uses the weapon.
 	COutputEvent			m_OnPlayerPickup;	// Fired when the player picks up the weapon.
