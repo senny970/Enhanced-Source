@@ -3,7 +3,7 @@
 
 #include "smmod/weapon_parse_custom_weapon.h"
 
-#ifdef HL2
+#ifdef HL2_DLL
 #include "weapon_rpg.h"
 #include "basehlcombatweapon.h"
 #define CUSTOM_WEAPON_BASE CHLSelectFireMachineGun
@@ -30,7 +30,7 @@ public:
 	void	ShootBulletsRight(bool isPrimary = true, bool usePrimaryAmmo = true);
 	void	ShootBulletsLeft(bool isPrimary = true, bool usePrimaryAmmo = true);
 
-#ifdef HL2
+#ifdef HL2_DLL
 	void	ShootProjectile( bool isPrimary, bool usePrimaryAmmo );
 	void	ShootProjectileRight(bool isPrimary, bool usePrimaryAmmo);
 	void	ShootProjectileLeft(bool isPrimary, bool usePrimaryAmmo);
@@ -151,7 +151,7 @@ private:
 private:
 	bool				m_bInZoom;
 	bool				bFlip;
-#ifdef HL2
+#ifdef HL2_DLL
 	CHandle<CMissile>	m_hMissile;
 	CHandle<CMissile>	m_hMissile2;
 #endif

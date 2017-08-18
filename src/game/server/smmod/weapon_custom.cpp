@@ -19,7 +19,7 @@
 #include "te_effect_dispatch.h"
 #include "particle_parse.h"
 
-#ifdef HL2
+#ifdef HL2_DLL
 #include "game.h"
 #include "weapon_rpg.h"
 #include "grenade_ar2.h"
@@ -53,7 +53,7 @@ IMPLEMENT_SERVERCLASS_ST( CWeaponCustom, DT_WeaponCustom )
 END_SEND_TABLE()
 
 BEGIN_DATADESC( CWeaponCustom )
-#ifdef HL2
+#ifdef HL2_DLL
 	DEFINE_FIELD( m_hMissile, FIELD_EHANDLE ),
 	DEFINE_FIELD( m_hMissile2, FIELD_EHANDLE ),
 #endif
@@ -683,7 +683,7 @@ void CWeaponCustom::ShootBulletsRight( bool isPrimary, bool usePrimaryAmmo )
 	pPlayer->SetMuzzleFlashTime( gpGlobals->curtime + 0.5 );
 }
 
-#ifdef HL2_DLL
+#ifdef HL2_DLL_DLL
 extern int g_interactionPlayerLaunchedRPG;
 
 void CWeaponCustom::ShootProjectile( bool isPrimary, bool usePrimaryAmmo )
@@ -1565,7 +1565,7 @@ void CWeaponCustom::PrimaryAttack( void )
 	if ( GetWpnDataCustom().primary.hasFire )
 	{
 		CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
-#ifdef HL2
+#ifdef HL2_DLL
 		if ( GetWpnDataCustom().primary.missleEnabled )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
@@ -1874,7 +1874,7 @@ void CWeaponCustom::SecondaryAttack( void )
 	{
 		CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 
-#ifdef HL2
+#ifdef HL2_DLL
 		if ( GetWpnDataCustom().secondary.missleEnabled )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
