@@ -683,7 +683,7 @@ void CWeaponCustom::ShootBulletsRight( bool isPrimary, bool usePrimaryAmmo )
 	pPlayer->SetMuzzleFlashTime( gpGlobals->curtime + 0.5 );
 }
 
-#ifdef HL2_DLL_DLL
+#ifdef HL2_DLL
 extern int g_interactionPlayerLaunchedRPG;
 
 void CWeaponCustom::ShootProjectile( bool isPrimary, bool usePrimaryAmmo )
