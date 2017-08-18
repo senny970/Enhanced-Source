@@ -5,25 +5,27 @@
 //=============================================================================//
 
 #include "cbase.h"
-#include "basehlcombatweapon.h"
+#include "weapon_custom.h"
 #include "NPCevent.h"
 #include "basecombatcharacter.h"
 #include "AI_BaseNPC.h"
 #include "player.h"
-#include "game.h"
 #include "in_buttons.h"
-#include "grenade_ar2.h"
-#include "weapon_rpg.h"
 #include "triggers.h"
 #include "AI_Memory.h"
 #include "soundent.h"
-#include "rumble_shared.h"
 #include "gamestats.h"
 #include "Filesystem.h"
-#include "weapon_custom.h"
-#include "prop_combine_ball.h"
 #include "te_effect_dispatch.h"
 #include "particle_parse.h"
+
+#ifdef HL2_DLL
+#include "game.h"
+#include "weapon_rpg.h"
+#include "grenade_ar2.h"
+#include "prop_combine_ball.h"
+#include "rumble_shared.h"
+#endif
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -51,20 +53,16 @@ IMPLEMENT_SERVERCLASS_ST( CWeaponCustom, DT_WeaponCustom )
 END_SEND_TABLE()
 
 BEGIN_DATADESC( CWeaponCustom )
+#ifdef HL2_DLL
 	DEFINE_FIELD( m_hMissile, FIELD_EHANDLE ),
 	DEFINE_FIELD( m_hMissile2, FIELD_EHANDLE ),
+#endif
 	DEFINE_FIELD( m_bInZoom, FIELD_BOOLEAN ),
 END_DATADESC()
 
 //=========================================================
 CWeaponCustom::CWeaponCustom()
 {
-}
-
-void CWeaponCustom::PostConstructor( const char* classname )
-{
-	BaseClass::PostConstructor( classname );
-
 }
 
 
@@ -687,7 +685,6 @@ void CWeaponCustom::ShootBulletsRight( bool isPrimary, bool usePrimaryAmmo )
 
 #ifdef HL2_DLL
 extern int g_interactionPlayerLaunchedRPG;
-#endif
 
 void CWeaponCustom::ShootProjectile( bool isPrimary, bool usePrimaryAmmo )
 {
@@ -697,7 +694,6 @@ void CWeaponCustom::ShootProjectile( bool isPrimary, bool usePrimaryAmmo )
 
 	if ( m_hMissile2 != NULL )
 		return;
-
 	// Can't be reloading
 	if ( GetActivity() == ACT_VM_RELOAD )
 		return;
@@ -1516,6 +1512,8 @@ void CWeaponCustom::ShootAR2EnergyBallLeft( bool isPrimary, bool usePrimaryAmmo 
 	else
 		m_flNextSecondaryAttack = gpGlobals->curtime + GetSecondaryFireRate();
 }
+#endif
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 // Output : Activity
@@ -1567,7 +1565,7 @@ void CWeaponCustom::PrimaryAttack( void )
 	if ( GetWpnDataCustom().primary.hasFire )
 	{
 		CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
-
+#ifdef HL2_DLL
 		if ( GetWpnDataCustom().primary.missleEnabled )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
@@ -1652,6 +1650,7 @@ void CWeaponCustom::PrimaryAttack( void )
 				ShootAR2EnergyBall( true, true );
 			}
 		}
+#endif
 		if ( IsPrimaryBullet() )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
@@ -1875,6 +1874,7 @@ void CWeaponCustom::SecondaryAttack( void )
 	{
 		CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 
+#ifdef HL2_DLL
 		if ( GetWpnDataCustom().secondary.missleEnabled )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
@@ -1920,6 +1920,7 @@ void CWeaponCustom::SecondaryAttack( void )
 				ShootAR2EnergyBall( false, GetWpnDataCustom().m_sUsePrimaryAmmo );
 			}
 		}
+#endif
 		if ( IsSecondaryBullet() )
 		{
 			if ( GetWpnDataCustom().m_sDualWeapons )
