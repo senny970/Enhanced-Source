@@ -24,8 +24,6 @@ public:
 	void			LevelInit( void );
 	void			LevelShutdown( void );
 
-	void			ResetCascadeDelay();
-
 	void			ViewDrawSceneDeferred( const CViewSetup &view, int nClearFlags, view_id_t viewID,
 		bool bDrawViewModel );
 
@@ -60,8 +58,6 @@ private:
 	void DebugRadiosity( const CViewSetup &view );
 
 	void RenderCascadedShadows( const CViewSetup &view, const bool bEnableRadiosity );
-
-	float m_flRenderDelay[SHADOW_NUM_CASCADES];
 
 	IMesh *GetRadiosityScreenGrid( const int iCascade );
 	IMesh *CreateRadiosityScreenGrid( const Vector2D &vecViewportBase, const float flWorldStepSize );

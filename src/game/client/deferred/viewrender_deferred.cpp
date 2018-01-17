@@ -697,19 +697,11 @@ void CDeferredViewRender::Shutdown()
 void CDeferredViewRender::LevelInit()
 {
 	BaseClass::LevelInit();
-
-	ResetCascadeDelay();
 }
 
 void CDeferredViewRender::LevelShutdown()
 {
 	BaseClass::LevelShutdown();
-}
-
-void CDeferredViewRender::ResetCascadeDelay()
-{
-	for ( int i = 0; i < SHADOW_NUM_CASCADES; i++ )
-		m_flRenderDelay[i] = 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -1375,17 +1367,6 @@ void CDeferredViewRender::RenderCascadedShadows( const CViewSetup &view, const b
 		const cascade_t &cascade = GetCascadeInfo(i);
 		const bool bDoRadiosity = bEnableRadiosity && cascade.bOutputRadiosityData;
 		const int iRadTarget = cascade.iRadiosityCascadeTarget;
-
-		float delta = m_flRenderDelay[i] - gpGlobals->curtime;
-		if ( delta > 0.0f && delta < 1.0f )
-		{
-			if ( bDoRadiosity )
-				PerformRadiosityGlobal( iRadTarget, view );
-
-			continue;
-		}
-
-		m_flRenderDelay[i] = gpGlobals->curtime + cascade.flUpdateDelay;
 
 #if CSM_USE_COMPOSITED_TARGET == 0
 		int textureIndex = i;
