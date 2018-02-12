@@ -13,9 +13,13 @@
 #include <string>
 
 #ifndef CLIENT_DLL
+#ifdef SMMOD
 	#include "smmod/weapon_custom.h"
+#endif
 #else
+#ifdef SMMOD
 	#include "smmod/c_weapon_custom.h"
+#endif
 	#include "networkstringtabledefs.h"
 #endif
 
@@ -168,6 +172,7 @@ void ResetFileWeaponInfoDatabase( void )
 }
 #endif
 
+#ifdef SMMOD
 #ifdef CLIENT_DLL
 static C_BaseEntity *C_ScriptedWeaponFactory( const char* className )
 {
@@ -251,6 +256,7 @@ void PrecacheCustomFileWeaponInfoDatabase( IFileSystem *filesystem )
 
 	filesystem->FindClose( matHandle );
 }
+#endif
 
 void PrecacheFileWeaponInfoDatabase( IFileSystem *filesystem, const unsigned char *pICEKey )
 {
@@ -371,16 +377,25 @@ bool ReadWeaponDataFromFileForSlot( IFileSystem* filesystem, const char *szWeapo
 	if ( pFileInfo->bParsedScript )
 		return true;
 
+#ifdef SMMOD
 #ifdef CLIENT_DLL
 	if ( customWepDatabase.Find( szWeaponName ) != customWepDatabase.InvalidIndex() )
 		bIsCustom = true;
 #endif
+
 
 	char sz[128];
 	Q_snprintf( sz, sizeof( sz ), bIsCustom ? "scripts/weapon_custom/%s" : "scripts/%s", szWeaponName );
 	KeyValues *pKV = ReadEncryptedKVFile( filesystem, sz, pICEKey );
 	if ( !pKV )
 		return false;
+#else
+	char sz[128];
+	Q_snprintf(sz, sizeof(sz), "scripts/%s", szWeaponName);
+	KeyValues *pKV = ReadEncryptedKVFile(filesystem, sz, pICEKey);
+	if (!pKV)
+		return false;
+#endif
 
 	pFileInfo->Parse( pKV, szWeaponName );
 

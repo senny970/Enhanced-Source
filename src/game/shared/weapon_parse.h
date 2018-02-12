@@ -147,7 +147,9 @@ FileWeaponInfo_t *GetFileWeaponInfoFromHandle( WEAPON_FILE_INFO_HANDLE handle );
 WEAPON_FILE_INFO_HANDLE GetInvalidWeaponInfoHandle( void );
 void PrecacheFileWeaponInfoDatabase( IFileSystem *filesystem, const unsigned char *pICEKey );
 
+#ifdef SMMOD
 void PrecacheCustomFileWeaponInfoDatabase( IFileSystem *filesystem );
+#endif
 
 // 
 // Read a possibly-encrypted KeyValues file in. 

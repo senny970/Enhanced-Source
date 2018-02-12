@@ -2128,8 +2128,10 @@ void OnSceneStringTableChanged( void *object, INetworkStringTable *stringTable, 
 {
 }
 
+#ifdef SMMOD
 void OnCustomWeaponsTableChanged( void *object, INetworkStringTable *stringTable, int stringNumber, const char *newString, void const *newData );
 void OnCustomWeaponsFactoryTableChanged( void *object, INetworkStringTable *stringTable, int stringNumber, const char *newString, void const *newData );
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: Hook up any callbacks here, the table definition has been parsed but 
@@ -2185,6 +2187,7 @@ void CHLClient::InstallStringTableCallback( const char *tableName )
 		// When the particle system list changes, we need to know immediately
 		g_pStringTableExtraParticleFiles->SetStringChangedCallback( NULL, OnPrecacheParticleFile );
 	}
+#ifdef SMMOD
 	else if ( !Q_strcasecmp( tableName, "CustomWeaponsAliases" ) )
 	{
 		g_pStringTableCustomWeapons = networkstringtable->FindTable( tableName );
@@ -2197,6 +2200,7 @@ void CHLClient::InstallStringTableCallback( const char *tableName )
 		networkstringtable->SetAllowClientSideAddString( g_pStringTableCustomWeaponsFactory, false );
 		g_pStringTableCustomWeaponsFactory->SetStringChangedCallback( NULL, OnCustomWeaponsFactoryTableChanged );
 	}
+#endif
 #ifdef DEFERRED
 	// @Deferred - Biohazard
 	else if (!Q_strcasecmp(tableName, COOKIE_STRINGTBL_NAME))
