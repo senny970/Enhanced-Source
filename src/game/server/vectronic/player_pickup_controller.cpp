@@ -1099,6 +1099,7 @@ END_DATADESC()
 //-----------------------------------------------------------------------------
 void CPlayerPickupController::Init( CBasePlayer *pPlayer, CBaseEntity *pObject )
 {
+#/*
 	// Holster player's weapon
 	if ( pPlayer->GetActiveWeapon() )
 	{
@@ -1115,6 +1116,17 @@ void CPlayerPickupController::Init( CBasePlayer *pPlayer, CBaseEntity *pObject )
 				Shutdown();
 				return;
 			}
+		}
+	}
+	*/
+
+	// Holster player's weapon
+	if (pPlayer->GetActiveWeapon())
+	{
+		if (!pPlayer->GetActiveWeapon()->CanHolster() || !pPlayer->GetActiveWeapon()->Holster())
+		{
+			Shutdown();
+			return;
 		}
 	}
 
