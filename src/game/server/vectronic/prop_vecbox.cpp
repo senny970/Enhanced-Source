@@ -92,6 +92,8 @@ BEGIN_DATADESC( CVecBox )
 	DEFINE_INPUTFUNC(FIELD_VOID, "DisableBallTouch", InputDisableTouch),
 	DEFINE_INPUTFUNC(FIELD_VOID, "EnableBallTouch", InputEnableTouch),
 
+	DEFINE_INPUTFUNC(FIELD_VOID, "EnableGravity", InputEnableGravity), //02/13/18 - Added upon request
+
 	// Ghost
 	DEFINE_INPUTFUNC(FIELD_VOID, "MakeGhost", InputMakeGhost),
 	DEFINE_INPUTFUNC( FIELD_VOID, "KillGhost", InputKillGhost ),
@@ -484,6 +486,14 @@ void CVecBox::InputDissolve( inputdata_t &inputData )
 	// We may have to think for this...
 	m_OnFizzled.FireOutput( this, this );
 	OnDissolve();
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CVecBox::InputEnableGravity(inputdata_t &inputData)
+{
+	VPhysicsGetObject()->EnableGravity(inputData.value.Bool());
 }
 
 //-----------------------------------------------------------------------------

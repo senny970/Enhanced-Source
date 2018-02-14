@@ -118,6 +118,7 @@ public:
 
 	unsigned char GetState() const { return m_intLastBallHit;	}
 
+	void InputEnableGravity(inputdata_t &inputData);
 	void InputDissolve( inputdata_t &inputData );
 	void InputExplode( inputdata_t &inputData );
 	void InputMakeGhost(inputdata_t &inputData);
