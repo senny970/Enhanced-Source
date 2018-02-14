@@ -10,7 +10,7 @@
 	SupportsXbox360 0
 
 	GameData    "vectronic.fgd"
-	InstancePath "F:\Source\Vectronic\mapsrc"
+	InstancePath "F:\Source\Vectronic\mapsrc" //<- YOU NEED TO EDIT THIS FIELD FOR INSTANCES TO WORK PROPERLY. SET IT TO THE MAPSRC DIR.
 
 
 	FileSystem
