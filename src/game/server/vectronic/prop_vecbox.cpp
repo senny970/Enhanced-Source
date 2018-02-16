@@ -92,7 +92,7 @@ BEGIN_DATADESC( CVecBox )
 	DEFINE_INPUTFUNC(FIELD_VOID, "DisableBallTouch", InputDisableTouch),
 	DEFINE_INPUTFUNC(FIELD_VOID, "EnableBallTouch", InputEnableTouch),
 
-	DEFINE_INPUTFUNC(FIELD_VOID, "EnableGravity", InputEnableGravity), //02/13/18 - Added upon request
+	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "EnableGravity", InputEnableGravity), //02/13/18 - Added upon request
 
 	// Ghost
 	DEFINE_INPUTFUNC(FIELD_VOID, "MakeGhost", InputMakeGhost),
@@ -1462,6 +1462,7 @@ void CVecBox::MakeGhost()
 
 	m_hBox->m_bIsGhost = true;
 	m_hBox->SetCurrentBall(GHOSTID);
+	//m_hBox->SetCollisionGroup(COLLISION_GROUP_DEBRIS);
 	m_hBox->Spawn();
 	m_hBox->MakeGhost2();
 }

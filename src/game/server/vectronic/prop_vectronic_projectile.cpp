@@ -1532,7 +1532,7 @@ void CPropParticleBall::DoImpactEffect( const Vector &preVelocity, int index, ga
 	CollisionEventToTrace( !index, pEvent, tr );
 
 	CBaseEntity *pTraceEntity = pEvent->pEntities[index];
-	UTIL_TraceLine( tr.startpos - preVelocity * 2.0f, tr.startpos + preVelocity * 2.0f, MASK_SHOT_PORTAL, pTraceEntity, COLLISION_GROUP_NONE, &tr );
+	UTIL_TraceLine(tr.startpos - preVelocity * 2.0f, tr.startpos + preVelocity * 2.0f, MASK_SHOT_PORTAL, pTraceEntity, COLLISION_GROUP_NONE, &tr);
 
 	if ( tr.fraction < 1.0f )
 	{
@@ -1825,11 +1825,14 @@ bool CPropParticleBall::IsHittableEntity( CBaseEntity *pHitEntity )
 		return false;
 	}
 
-	//CVecBox *m_pBox = NULL;
-
 	if ( FClassnameIs( pHitEntity, "prop_vecbox" ))
-	//if ( m_pBox )
 	{
+		/*
+		CVecBox* m_pBox = static_cast<CVecBox*>(pHitEntity);
+		if (m_pBox->IsGhost())
+			return false;
+		*/
+
 		m_bHitBox = true;
 		DoExplosion();
 

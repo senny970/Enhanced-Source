@@ -48,11 +48,13 @@ function EffectBall5()
 {
 	// Do something.....
 	printl("==========================Effect 5!")	
+	EntFire(self.GetName(),"EnableGravity","0",0.0)
 }
 
 function ClearEffectBall5()
 {
 	// Do something.....
+	EntFire(self.GetName(),"EnableGravity","1",0.0)
 }
 
 function OnReset()
