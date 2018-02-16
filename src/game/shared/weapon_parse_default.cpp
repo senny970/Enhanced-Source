@@ -11,8 +11,16 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+#ifdef SMMOD
 // Default implementation for games that don't add custom data to the weapon scripts.
 FileWeaponInfo_t* CreateWeaponInfo()
 {
 	return new CustomWeaponInfo;
 }
+#else
+// Default implementation for games that don't add custom data to the weapon scripts.
+FileWeaponInfo_t* CreateWeaponInfo()
+{
+	return new FileWeaponInfo_t;
+}
+#endif
