@@ -1,0 +1,121 @@
+"Configs"
+{
+	"Games"
+	{
+		"Template"
+		{
+			"GameDir"		"E:\Files\GitHub\Enhanced-Source\game\template"
+			"Hammer"
+			{
+				"GameData0"		"E:\Files\GitHub\Enhanced-Source\game\bin\base.fgd"
+				"TextureFormat"		"5"
+				"MapFormat"		"4"
+				"DefaultTextureScale"		"0.250000"
+				"DefaultLightmapScale"		"16"
+				"GameExe"		"E:\Files\GitHub\Enhanced-Source\game\swarm.exe"
+				"DefaultSolidEntity"		"func_detail"
+				"DefaultPointEntity"		"info_player_start"
+				"BSP"		"E:\Files\GitHub\Enhanced-Source\game\bin\vbsp.exe"
+				"Vis"		"E:\Files\GitHub\Enhanced-Source\game\bin\vvis.exe"
+				"Light"		"E:\Files\GitHub\Enhanced-Source\game\bin\vrad.exe"
+				"GameExeDir"		"E:\Files\GitHub\Enhanced-Source\game"
+				"MapDir"		"E:\Files\GitHub\Enhanced-Source\game\content\template\mapsrc"
+				"BSPDir"		"E:\Files\GitHub\Enhanced-Source\game\template\maps"
+				"PrefabDir"		"E:\Files\GitHub\Enhanced-Source\game\bin\Prefabs"
+				"CordonTexture"		"tools\toolsskybox"
+				"MaterialExcludeCount"		"0"
+			}
+		}
+		"Deferred"
+		{
+			"GameDir"		"E:\Files\GitHub\Enhanced-Source\game\deferred"
+			"Hammer"
+			{
+				"GameData0"		"E:\Files\GitHub\Enhanced-Source\game\deferred\deferred.fgd"
+				"TextureFormat"		"5"
+				"MapFormat"		"4"
+				"DefaultTextureScale"		"0.250000"
+				"DefaultLightmapScale"		"16"
+				"GameExe"		"E:\Files\GitHub\Enhanced-Source\game\swarm.exe"
+				"DefaultSolidEntity"		"func_detail"
+				"DefaultPointEntity"		"env_cubemap"
+				"BSP"		"E:\Files\GitHub\Enhanced-Source\game\bin\vbsp.exe"
+				"Vis"		"E:\Files\GitHub\Enhanced-Source\game\bin\vvis.exe"
+				"Light"		"E:\Files\GitHub\Enhanced-Source\game\bin\vrad.exe"
+				"GameExeDir"		"E:\Files\GitHub\Enhanced-Source\game"
+				"MapDir"		"E:\Files\GitHub\Enhanced-Source\game\deferred\mapsrc"
+				"BSPDir"		"E:\Files\GitHub\Enhanced-Source\game\deferred\maps"
+				"PrefabDir"		"E:\Files\GitHub\Enhanced-Source\game\bin\Prefabs"
+				"CordonTexture"		"BLACK"
+				"MaterialExcludeCount"		"0"
+			}
+		}
+		"Portal Template"
+		{
+			"GameDir"		"E:\Files\GitHub\Enhanced-Source\game\portal_template"
+			"Hammer"
+			{
+				"TextureFormat"		"5"
+				"MapFormat"		"4"
+				"DefaultTextureScale"		"0.250000"
+				"DefaultLightmapScale"		"16"
+				"DefaultSolidEntity"		"func_detail"
+				"GameExeDir"		"E:\Files\GitHub\Enhanced-Source\game"
+				"MapDir"		"\content\\mapsrc"
+				"CordonTexture"		"tools\toolsskybox"
+				"MaterialExcludeCount"		"0"
+				"GameExe"		"E:\Files\GitHub\Enhanced-Source\game\swarm.exe"
+				"BSP"		"E:\Files\GitHub\Enhanced-Source\game\bin\vbsp.exe"
+				"Vis"		"E:\Files\GitHub\Enhanced-Source\game\bin\vvis.exe"
+				"Light"		"E:\Files\GitHub\Enhanced-Source\game\bin\vrad.exe"
+				"BSPDir"		"\\maps"
+				"GameData0"		"E:\Files\GitHub\Enhanced-Source\game\bin\swarm.fgd"
+			}
+		}
+		"HL2 Template"
+		{
+			"GameDir"		"E:\Files\GitHub\Enhanced-Source\game\hl2_template"
+			"Hammer"
+			{
+				"TextureFormat"		"5"
+				"MapFormat"		"4"
+				"DefaultTextureScale"		"0.250000"
+				"DefaultLightmapScale"		"16"
+				"DefaultSolidEntity"		"func_detail"
+				"GameExeDir"		"E:\Files\GitHub\Enhanced-Source\game"
+				"MapDir"		"E:\Files\GitHub\Enhanced-Source\game\content\hl2_template\mapsrc"
+				"CordonTexture"		"tools\toolsskybox"
+				"MaterialExcludeCount"		"0"
+				"GameExe"		"E:\Files\GitHub\Enhanced-Source\game\swarm.exe"
+				"BSP"		"E:\Files\GitHub\Enhanced-Source\game\bin\vbsp.exe"
+				"Vis"		"E:\Files\GitHub\Enhanced-Source\game\bin\vvis.exe"
+				"Light"		"E:\Files\GitHub\Enhanced-Source\game\bin\vrad.exe"
+				"BSPDir"		"E:\Files\GitHub\Enhanced-Source\game\hl2_template\maps"
+				"GameData0"		"E:\Files\GitHub\Enhanced-Source\game\bin\swarm.fgd"
+			}
+		}
+		"Vectronic"
+		{
+			"GameDir"		"E:\Files\GitHub\Enhanced-Source\game\vectronic"
+			"Hammer"
+			{
+				"TextureFormat"		"5"
+				"MapFormat"		"4"
+				"DefaultTextureScale"		"0.250000"
+				"DefaultLightmapScale"		"16"
+				"DefaultSolidEntity"		"func_detail"
+				"GameExeDir"		"E:\Files\GitHub\Enhanced-Source\game"
+				"MapDir"		"E:\Files\GitHub\Enhanced-Source\game\content\vectronic\mapsrc"
+				"CordonTexture"		"tools\toolsskybox"
+				"MaterialExcludeCount"		"0"
+				"GameExe"		"E:\Files\GitHub\Enhanced-Source\game\swarm.exe"
+				"BSP"		"E:\Files\GitHub\Enhanced-Source\game\bin\vbsp.exe"
+				"Vis"		"E:\Files\GitHub\Enhanced-Source\game\bin\vvis.exe"
+				"Light"		"E:\Files\GitHub\Enhanced-Source\game\bin\vrad.exe"
+				"BSPDir"		"E:\Files\GitHub\Enhanced-Source\game\vectronic\maps"
+				"GameData0"		"E:\Files\GitHub\Enhanced-Source\game\bin\swarm.fgd"
+			}
+		}
+	}
+	"SDKVersion"		"5"
+}
