@@ -97,13 +97,13 @@ Media
 			enginetools
 			{
 				Title			"Engine (Tools Mode)"
-				Program			".\\swarm.exe -game \"%gamedir%\" -tools -dev -nop4 -override_vpk"
+				Program			"swarm.exe -game \"%gamedir%\" -tools -dev -nop4 -override_vpk"
 				Image			7
 			}
 			game
 			{
 				Title			"Start Game"
-				Program			".\\swarm.exe -game \"%gamedir%\" -dev -nop4 -override_vpk"
+				Program			"swarm.exe -game \"%gamedir%\" -dev -nop4 -override_vpk"
 				Image			1
 			}
 
