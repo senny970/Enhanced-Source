@@ -38,17 +38,17 @@ Scheme
 		"DimListText"		"117 134 102 255"	// offline friends, unsubscribed games, etc.
 
 		// background colors
-		"ControlBG"			"44 51 69 255"		// background color of controls
-		"ControlDarkBG"		"27 27 37 255"		// darker background color; used for background of scrollbars
+		"ControlBG"			"76 88 68 255"		// background color of controls
+		"ControlDarkBG"		"90 106 80 255"		// darker background color; used for background of scrollbars
 		"WindowBG"			"62 70 55 255"		// background color of text edit panes (chat, text entries, etc.)
-		"SelectionBG"		"65 75 102 255"	// background color of any selected text or menu item
-		"SelectionBG2"		"65 75 102 255"		// selection background in window w/o focus
-		"ListBG"			"0 0 0 128"		// background of server browser, buddy list, etc.
+		"SelectionBG"		"149 136 49 255"	// background color of any selected text or menu item
+		"SelectionBG2"		"40 46 34 255"		// selection background in window w/o focus
+		"ListBG"			"62 70 55 255"		// background of server browser, buddy list, etc.
 
 		// titlebar colors
 		"TitleText"			"255 255 255 255"
 		"TitleDimText"		"136 145 128 255"
-		"TitleBG"			"44 51 69 255"
+		"TitleBG"			"76 88 68 0"
 		"TitleDimBG"		"76 88 68 0"
 		
 		// slider tick colors
@@ -56,7 +56,7 @@ Scheme
 		"SliderTrackColor"	"31 31 31 255"
 
 		// border colors
-		"BorderBright"		"115 115 115 255"	// the lit side of a control
+		"BorderBright"		"136 145 128 255"	// the lit side of a control
 		"BorderDark"		"40 46 34 255"		// the dark/unlit side of a control
 		"BorderSelection"	"0 0 0 255"			// the additional border color for displaying the default/selected button
 
@@ -71,7 +71,7 @@ Scheme
 	{
 		// vgui_controls color specifications
 		Border.Bright					"BorderBright"	// the lit side of a control
-		Border.Dark						"BorderBright"		// the dark/unlit side of a control
+		Border.Dark						"BorderDark"		// the dark/unlit side of a control
 		Border.Selection				"BorderSelection"			// the additional border color for displaying the default/selected button
 
 		Button.TextColor				"ControlText"
@@ -108,10 +108,10 @@ Scheme
 		FrameTitleButton.BgColor		"ControlBG"
 		FrameTitleButton.DisabledFgColor	"TitleDimText"
 		FrameTitleButton.DisabledBgColor	"TitleDimBG"
-		FrameSystemButton.FgColor		"ControlBG"
-		FrameSystemButton.BgColor		"ControlBG"
-		FrameSystemButton.Icon			""
-		FrameSystemButton.DisabledIcon	""
+		FrameSystemButton.FgColor		"TitleBG"
+		FrameSystemButton.BgColor		"TitleBG"
+		FrameSystemButton.Icon			"resource/icon_steam"
+		FrameSystemButton.DisabledIcon	"resource/icon_steam_disabled"
 		FrameTitleBar.TextColor			"TitleText"
 		FrameTitleBar.BgColor			"TitleBG"
 		FrameTitleBar.DisabledTextColor	"TitleText"
