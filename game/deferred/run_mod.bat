@@ -1,1 +1,1 @@
-@"../swarm.exe" -sw -w 1280 -h 720 -dev -allowdebug -game template
+@start "source" "../swarm.exe" -dev -allowdebug -game deferred -override_vpk

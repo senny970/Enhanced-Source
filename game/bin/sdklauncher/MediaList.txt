@@ -96,9 +96,15 @@ Media
 			}
 			enginetools
 			{
-				Title			"Enhanced Source (Tools Mode)"
-				Program			".\\swarm.exe -tools -dev -nop4"
+				Title			"Engine (Tools Mode)"
+				Program			"swarm.exe -game \"%gamedir%\" -tools -dev -nop4 -override_vpk"
 				Image			7
+			}
+			game
+			{
+				Title			"Start Game"
+				Program			"swarm.exe -game \"%gamedir%\" -dev -nop4 -override_vpk"
+				Image			1
 			}
 
 		}
@@ -106,13 +112,7 @@ Media
 		{
 			id		2
 			Name	"Utilities"
-
-			resetconfig
-			{
-				Title			"Reset Game Configurations"
-				InlineProgram	"reset_configs"
-				Image			11
-			}
+			
 			editconfigs
 			{
 				Title			"Edit Game Configurations"
@@ -120,6 +120,7 @@ Media
 
 				Program			"vconfig.exe"
 			}
+	
 		}
 		"3"
 		{
@@ -129,13 +130,13 @@ Media
 			l4dstart
 			{
 				Title			"Getting Started Guide"
-				ShellExecute	"http://developer.valvesoftware.com/wiki/Authoring_Tools/SDK_(Alien_Swarm)"
+				ShellExecute		"https://developer.valvesoftware.com/wiki/SDK_Docs"
 				Image			8
 			}
 			example
 			{
 				Title			"Example Content"
-				ShellExecute	".\\sdk_content"
+				ShellExecute		".\\sdk_content"
 				Image			13
 			}
 		}
