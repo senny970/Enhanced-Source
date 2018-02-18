@@ -12,6 +12,8 @@ PRECACHE_REGISTER(prop_glow);
 
 IMPLEMENT_SERVERCLASS_ST(CBaseGlowAnimating, DT_BaseGlowAnimating)
 	SendPropBool( SENDINFO( m_bGlowEnabled ) ),
+	//SendPropBool(SENDINFO(m_bRenderWhenOccluded)),
+	//SendPropBool(SENDINFO(m_bRenderWhenUnOccluded)),
 	SendPropFloat( SENDINFO( m_flRedGlowColor ) ),
 	SendPropFloat( SENDINFO( m_flGreenGlowColor ) ),
 	SendPropFloat( SENDINFO( m_flBlueGlowColor ) ),
@@ -19,17 +21,22 @@ END_SEND_TABLE()
 
 BEGIN_DATADESC( CBaseGlowAnimating )
 
-	//Save/load
+	DEFINE_KEYFIELD(m_bGlowEnabled, FIELD_BOOLEAN, "glowstate"),
+	//DEFINE_KEYFIELD(m_bRenderWhenOccluded, FIELD_BOOLEAN, "glowrenderwhenoccluded"),
+	//DEFINE_KEYFIELD(m_bRenderWhenUnOccluded, FIELD_BOOLEAN, "glowrenderwhenunoccluded"),
+	DEFINE_KEYFIELD(m_clrGlow, FIELD_COLOR32, "glowcolor"),
 
-	DEFINE_FIELD( m_bGlowEnabled, FIELD_BOOLEAN ),
+	//Save/load
+	//DEFINE_FIELD( m_bGlowEnabled, FIELD_BOOLEAN ),
 	DEFINE_FIELD( m_flRedGlowColor, FIELD_FLOAT ),
 	DEFINE_FIELD( m_flGreenGlowColor, FIELD_FLOAT ),
 	DEFINE_FIELD( m_flBlueGlowColor, FIELD_FLOAT ),
+	DEFINE_FIELD (m_flAlphaGlowColor, FIELD_FLOAT),
 
 
 	// I/O
-	DEFINE_INPUTFUNC( FIELD_VOID, "EnableGlow", InputStartGlow ),
-	DEFINE_INPUTFUNC( FIELD_VOID, "DisableGlow", InputEndGlow ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "StartGlowing", InputStartGlow ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "StopGlowing", InputEndGlow ),
 
 END_DATADESC()
 
@@ -59,6 +66,11 @@ void CBaseGlowAnimating::Precache( void )
 //-----------------------------------------------------------------------------
 void CBaseGlowAnimating::Spawn( void )
 {
+	m_flRedGlowColor = m_clrGlow->r;
+	m_flGreenGlowColor = m_clrGlow->g;
+	m_flBlueGlowColor = m_clrGlow->b;
+	//m_flAlphaGlowColor = m_clrGlow->a;
+
 	BaseClass::Spawn();
 }
 

@@ -224,6 +224,10 @@ BEGIN_DATADESC( CBaseAnimating )
 
 	DEFINE_FIELD( m_fBoneCacheFlags, FIELD_SHORT ),
 
+#ifdef PORTAL
+	DEFINE_OUTPUT(m_OnFizzled, "OnFizzled"),
+#endif
+
 	END_DATADESC()
 
 // Sendtable for fields we don't want to send to clientside animating entities
@@ -4019,4 +4023,9 @@ bool CBaseAnimating::IsSequenceLooping( CStudioHdr *pStudioHdr, int iSequence )
 	return (::GetSequenceFlags( pStudioHdr, iSequence ) & STUDIO_LOOPING) != 0;
 }
 
-
+#ifdef PORTAL
+void CBaseAnimating::OnFizzled(void)
+{
+	m_OnFizzled.FireOutput(this, this);
+}
+#endif

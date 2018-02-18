@@ -71,6 +71,27 @@
 	input EnableReceivingFlashlight(void) : "This object may recieve light or shadows from projected textures (flashlights)."
 ]
 
+@BaseClass = Glow
+[
+	// Commented values are TODO.
+	glowstate(choices) : "Glow State" : 0 =
+	[
+		0: "OFF"
+		//1: "+use"
+		//2: "look-at"
+		//3: "ON"
+		1: "ON"
+	]
+	//glowrenderwhenoccluded(boolean) : "Render glow when occluded" : 1
+	//glowrenderwhenunoccluded(boolean) : "Render glow when not occluded" : 0
+	//glowrange(integer) : "Glow Range" : 0 : "Range at which the glow becomes visible. (0 = always visible)"
+	//glowrangemin(integer) : "Glow Range Min" : 0 : "Range at which the glow stops being visible. (0 = always visible)"
+	glowcolor(color255) : "Glow Color Override (R G B)" : "0 0 0" : "Change the render color of the glow."
+
+	input StartGlowing(void) : "Turn on a permanent glow effect for this prop."
+	input StopGlowing(void) : "Turn off this prop's glow effect."
+]
+
 @BaseClass base(ToggleDraw, Shadow) = Studiomodel
 [
 	model(studio) report : "World Model"

@@ -354,8 +354,9 @@ public:
 
 	bool PrefetchSequence( int iSequence );
 
-
-
+#ifdef PORTAL
+	virtual void OnFizzled(void);
+#endif
 
 private:
 	void LockStudioHdr();
@@ -449,7 +450,9 @@ protected:
 public:
 	COutputEvent m_OnIgnite;
 
-
+#ifdef PORTAL
+	COutputEvent m_OnFizzled;		// Fizzled by a fizzler
+#endif
 
 private:
 	CStudioHdr			*m_pStudioHdr;

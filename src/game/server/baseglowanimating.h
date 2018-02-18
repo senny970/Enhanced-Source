@@ -47,9 +47,13 @@ public:
 protected:
 	void SetGlowVector(float r, float g, float b );
 	CNetworkVar( bool, m_bGlowEnabled );
+	//CNetworkVar(bool, m_bRenderWhenOccluded);
+	//CNetworkVar(bool, m_bRenderWhenUnOccluded);
 	CNetworkVar( float, m_flRedGlowColor );
 	CNetworkVar( float, m_flGreenGlowColor );
 	CNetworkVar( float, m_flBlueGlowColor );
+	CNetworkVar(float, m_flAlphaGlowColor);
+	CNetworkColor32(m_clrGlow);
 
 };
 

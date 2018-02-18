@@ -44,13 +44,16 @@ private:
 
 	bool				m_bGlowEnabled;
 	bool				m_bOldGlowEnabled;
+	//bool				m_bRenderWhenOccluded;
+	//bool				m_bRenderWhenUnOccluded;
 	CGlowObject			*m_pGlowEffect;
 	
 	float m_flRedGlowColor;
 	float m_flGreenGlowColor;
 	float m_flBlueGlowColor;
+	float m_flAlphaGlowColor;
 
-
+	CNetworkColor32(m_clrGlow);
 };
 
 #endif //C_BASEGLOWANIMATING_H
