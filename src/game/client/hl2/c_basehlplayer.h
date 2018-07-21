@@ -16,7 +16,9 @@
 #include "c_baseplayer.h"
 #include "c_hl2_playerlocaldata.h"
 #include "multiplayer/basenetworkedplayer_cl.h"
-
+#ifdef HL2_PLAYERANIMSTATE
+#include "hl2_playeranimstate.h"
+#endif
 class C_BaseHLPlayer : public C_BaseNetworkedPlayer
 {
 public:
@@ -26,7 +28,49 @@ public:
 
 						C_BaseHLPlayer();
 
-	virtual void		OnDataChanged( DataUpdateType_t updateType );
+						~C_BaseHLPlayer(void);
+						void ClientThink(void);
+						virtual void		OnDataChanged(DataUpdateType_t updateType);
+#ifdef HL2_PLAYERANIMSTATE
+						virtual void		OnPreDataChanged(DataUpdateType_t type);
+						virtual void		PostDataUpdate(DataUpdateType_t updateType);
+
+						//hl2 portal-animstate reimplementation.
+						virtual void			PreThink(void);
+						virtual void UpdateClientSideAnimation();
+						void DoAnimationEvent(PlayerAnimEvent_t event, int nData);
+						QAngle GetAnimEyeAngles(void) { return m_angEyeAngles; }
+						virtual const QAngle&	EyeAngles();
+						virtual const QAngle& GetRenderAngles();
+						CInterpolatedVar< QAngle >	m_iv_angEyeAngles;
+						virtual void Spawn(void);
+						CHL2PlayerAnimState *m_PlayerAnimState;
+						QAngle	m_angEyeAngles;
+						int	m_headYawPoseParam;
+						int	m_headPitchPoseParam;
+						float m_headYawMin;
+						float m_headYawMax;
+						float m_headPitchMin;
+						float m_headPitchMax;
+						void	UpdateLookAt(void);
+						void	Initialize(void);
+						virtual CStudioHdr*		OnNewModel(void);
+#endif
+
+						// Used by prediction, sets the view angles for the player
+						virtual void SetLocalViewAngles(const QAngle &viewAngles);
+						virtual void SetViewAngles(const QAngle &ang);
+
+						struct PreDataChanged_Backup_t
+						{
+							//Vector					m_ptPlayerPosition;
+							QAngle					m_qEyeAngles;
+						} PreDataChanged_Backup;
+
+						float m_flLastBodyYaw;
+						float m_flCurrentHeadYaw;
+						float m_flCurrentHeadPitch;
+						float m_flStartLookTime;
 
 	void				Weapon_DropPrimary( void );
 		
@@ -79,6 +123,18 @@ private:
 
 friend class CHL2GameMovement;
 };
+
+#ifdef HL2_PLAYERANIMSTATE
+static inline C_BaseHLPlayer* GetLocalPortalPlayer()
+{
+	return (C_BaseHLPlayer*)C_BasePlayer::GetLocalPlayer();
+}
+
+static inline C_BaseHLPlayer* GetLocalPlayer()
+{
+	return (C_BaseHLPlayer*)C_BasePlayer::GetLocalPlayer();
+}
+#endif
 
 
 #endif

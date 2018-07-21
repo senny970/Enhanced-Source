@@ -11,4 +11,9 @@ $Include "$SRCDIR\game\server\server_hl2_base.vpc"
 
 $Project "Server (HL2)"
 {
+	$Folder "Animstate"
+		{
+			$File	"$SRCDIR\game\shared\hl2\hl2_playeranimstate.h"
+			$File	"$SRCDIR\game\shared\hl2\hl2_playeranimstate.cpp"
+		}
 }
