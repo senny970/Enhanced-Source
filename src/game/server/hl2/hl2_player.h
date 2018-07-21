@@ -12,7 +12,9 @@
 #include "hl2_playerlocaldata.h"
 #include "simtimer.h"
 #include "soundenvelope.h"
-
+#ifdef HL2_PLAYERANIMSTATE
+#include "hl2_playeranimstate.h"
+#endif
 #include "multiplayer/basenetworkedplayer.h"
 
 class CAI_Squad;
@@ -321,6 +323,14 @@ private:
 
 	CNetworkVar( bool, m_fIsSprinting );
 	CNetworkVarForDerived( bool, m_fIsWalking );
+
+#ifdef HL2_PLAYERANIMSTATE
+	CNetworkQAngle(m_angEyeAngles);
+	CHL2PlayerAnimState*   m_PlayerAnimState;
+	void DoAnimationEvent(PlayerAnimEvent_t event, int nData);
+	virtual void SetAnimation(PLAYER_ANIM playerAnim);
+	void SetupBones(matrix3x4_t *pBoneToWorld, int boneMask);
+#endif
 
 protected:	// Jeep: Portal_Player needs access to this variable to overload PlayerUse for picking up objects through portals
 	// This player's HL2 specific data that should only be replicated to 
