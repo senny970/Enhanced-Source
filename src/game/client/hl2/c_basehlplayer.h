@@ -11,7 +11,7 @@
 #ifdef _WIN32
 #pragma once
 #endif
-
+#define HL2_PLAYERANIMSTATE
 
 #include "c_baseplayer.h"
 #include "c_hl2_playerlocaldata.h"
