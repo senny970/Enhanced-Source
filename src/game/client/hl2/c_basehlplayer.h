@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Â© 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -11,7 +11,7 @@
 #ifdef _WIN32
 #pragma once
 #endif
-
+//#define HL2_PLAYERANIMSTATE //uncomment for global hl2_playeranimstate across projects.
 
 #include "c_baseplayer.h"
 #include "c_hl2_playerlocaldata.h"
